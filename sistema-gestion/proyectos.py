@@ -1,7 +1,7 @@
 from tareas import Tarea,Tareas
 
 #Clase para la unidad de proyecto
-class proyecto:
+class Proyecto:
     def __init__(self,id,nombre,descripcion,fechaInicio,fechaVencimiento,estado,empresa,gerente,equipo):
         self.id = id
         self.nombre = nombre
@@ -13,11 +13,8 @@ class proyecto:
         self.gerente = gerente
         self.equipo = equipo
 
-        self.Tareas = None #Variable que contendrá las tareas
-        self.siguiente = None #Variable que contendrá el siguiente pedido
-
-    #Funciones
-
+        self.Tareas = Tareas() #Variable que contendrá un dato de tipo 'Tareas'
+        self.siguiente = None #Variable que contendrá el siguiente proyecto
 
     #Setters
     def setId(self,id): self.id=id
@@ -40,3 +37,7 @@ class proyecto:
     def getEmpresa(self): return self.empresa
     def getGerente(self): return self.gerente
     def getEquipo(self): return self.equipo
+
+class Proyectos:
+    def __init__(self):
+        self.cabeza = None
