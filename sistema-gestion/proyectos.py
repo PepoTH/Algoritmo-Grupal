@@ -53,11 +53,44 @@ class Proyectos:
                 aux = aux.siguiente
         return aux
     
-    def AgregarFinal(self,proyecto): #Función que agrega un proyecto a la cabeza de la lista
+    def agregarProyecto(self,proyecto): #Funcion que agrega un proyecto a la lista
         ultimo = self.ultimoProyecto()
         if ultimo != None:
             ultimo.siguiente = proyecto
             proyecto.siguiente = None
         else:
             self.cabeza = proyecto
+    
+    def crearProyecto(self): #Función que crea un proyecto
+        id = input("Ingrese la ID del nuevo proyecto: ")
+        nombre = input("Ingrese el nombre del proyecto: ")
+        descripcion = input("Ingrese la descripcion del proyecto: ")
+        fechaInicio = input("Ingrese la fecha en la que inicia el proyecto: ")
+        fechaVencimiento = input("Ingrese la fecha en la que finaliza el proyecto: ")
+        estado = input("Ingrese el estado actual del proyecto: ")
+        empresa = input("Ingrese la empresa que ocupa el proyecto: ")
+        gerente = input("Ingrese el gerente que gestiona el proyecto: ")
+        equipo = input("Ingrese el equipo encargado del proyecto: ")
+        proyecto = Proyecto(id,nombre,descripcion,fechaInicio,fechaVencimiento,estado,empresa,gerente,equipo)
+        self.agregarProyecto(proyecto)
+
+    def buscarProyecto(self):
+        print("1. Nombre")
+        print("2. ID")
+        print("3. Empresa")
+        print("4. Equipo")
+        opcion = ("Elige un criterio de busqueda (1,2,3,4): ")
+        busqueda = input("Ingrese el criterio: ")
+        aux = self.cabeza
+        while aux != None:
+            if opcion == "1" and aux.getNombre == busqueda:
+                return aux
+            if opcion == "2" and aux.getId == busqueda:
+                return aux
+            if opcion == "3" and aux.getEmpresa == busqueda:
+                return aux
+            if opcion == "4" and aux.getEquipo == busqueda:
+                return aux
+            aux = aux.siguiente
+        return print("No hay ningún proyecto con es criterio")
 
