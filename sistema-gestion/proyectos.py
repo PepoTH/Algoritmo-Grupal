@@ -21,3 +21,14 @@ class proyecto:
     def setEmpresa(self,empresa): self.empresa=empresa
     def setGerente(self,gerente): self.gerente=gerente
     def setEquipo(self,equipo): self.equipo=equipo
+
+    #Getters
+    def getId(self): return self.id
+    def getNombre(self): return self.nombre
+    def getDescripcion(self): return self.descripcion
+    def getFechaInicio(self): return self.fechaInicio
+    def getFechaVencimiento(self): return self.fechaVencimiento
+    def getEstado(self): return self.estado
+    def getEmpresa(self): return self.empresa
+    def getGerente(self): return self.gerente
+    def getEquipo(self): return self.equipo
