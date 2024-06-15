@@ -1,3 +1,5 @@
+from tareas import Tarea,Tareas
+
 #Clase para la unidad de proyecto
 class proyecto:
     def __init__(self,id,nombre,descripcion,fechaInicio,fechaVencimiento,estado,empresa,gerente,equipo):
@@ -11,7 +13,8 @@ class proyecto:
         self.gerente = gerente
         self.equipo = equipo
 
-        self.Tareas
+        self.Tareas = None #Variable que contendrá las tareas
+        self.siguiente = None #Variable que contendrá el siguiente pedido
 
     #Funciones
 
