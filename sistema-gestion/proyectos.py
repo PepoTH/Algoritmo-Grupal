@@ -11,6 +11,11 @@ class proyecto:
         self.gerente = gerente
         self.equipo = equipo
 
+        self.Tareas
+
+    #Funciones
+
+
     #Setters
     def setId(self,id): self.id=id
     def setNombre(self,nombre): self.nombre=nombre
