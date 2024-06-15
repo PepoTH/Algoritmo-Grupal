@@ -41,3 +41,23 @@ class Proyecto:
 class Proyectos:
     def __init__(self):
         self.cabeza = None
+
+    #Funciones
+    def ultimoProyecto(self): #Función que retorna el ultimo proyecto de la lista
+        if self.cabeza == None:
+            aux = None
+            return aux
+        else:
+            aux = self.cabeza
+            while aux.siguiente != None:
+                aux = aux.siguiente
+        return aux
+    
+    def AgregarFinal(self,proyecto): #Función que agrega un proyecto a la cabeza de la lista
+        ultimo = self.ultimoProyecto()
+        if ultimo != None:
+            ultimo.siguiente = proyecto
+            proyecto.siguiente = None
+        else:
+            self.cabeza = proyecto
+
