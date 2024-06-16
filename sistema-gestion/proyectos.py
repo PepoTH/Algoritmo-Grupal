@@ -2,7 +2,7 @@ from tareas import Tarea,Tareas
 
 #Clase para la unidad de proyecto
 class Proyecto:
-    def __init__(self,id,nombre,descripcion,fechaInicio,fechaVencimiento,estado,empresa,gerente,equipo):
+    def __init__(self,id,nombre,descripcion="",fechaInicio="",fechaVencimiento="",estado="",empresa="",gerente="",equipo=""):
         self.id = id
         self.nombre = nombre
         self.descripcion = descripcion
@@ -16,50 +16,38 @@ class Proyecto:
         self.Tareas = Tareas() #Variable que contendrá un dato de tipo 'Tareas'
         self.siguiente = None #Variable que contendrá el siguiente proyecto
 
-    #Setters
-    def setId(self,id): self.id=id
-    def setNombre(self,nombre): self.nombre=nombre
-    def setDescripcion(self,descripcion): self.descripcion=descripcion
-    def setFechaInicio(self,fechaInicio): self.fechaInicio=fechaInicio
-    def setFechaVencimiento(self,fechaVencimiento): self.fechaVencimiento=fechaVencimiento
-    def setEstado(self,estado): self.estado=estado
-    def setEmpresa(self,empresa): self.empresa=empresa
-    def setGerente(self,gerente): self.gerente=gerente
-    def setEquipo(self,equipo): self.equipo=equipo
+    def modificar(self):
+        self.id = input("Ingrese el nuevo ID del proyecto: ")
+        self.descripcion = input("Ingrese la nueva descripción del proyecto: ")
+        self.fechaInicio = input("Ingrese la nueva fecha de inicio: ")
+        self.fechaVencimiento = input("Ingrese la nueva fecha de vencimiento: ")
+        self.estado = input("Ingrese el nuevo estado del proyecto: ")
+        self.equipo = input("Ingrese la nueva empresa del proyecto: ")
+        self.gerente = input("Ingrese el nuevo gerente del proyecto: ")
+        self.equipo = input("Ingrese el nuevo equipo del proyecto: ")
+        self.nombre = input("Ingrese el nuevo nombre del proyecto: ")
 
-    #Getters
-    def getId(self): return self.id
-    def getNombre(self): return self.nombre
-    def getDescripcion(self): return self.descripcion
-    def getFechaInicio(self): return self.fechaInicio
-    def getFechaVencimiento(self): return self.fechaVencimiento
-    def getEstado(self): return self.estado
-    def getEmpresa(self): return self.empresa
-    def getGerente(self): return self.gerente
-    def getEquipo(self): return self.equipo
+class NodoProyectos:
+    def __init__(self, proyecto):
+        self.proyecto = proyecto
+        self.siguiente = None
 
 class Proyectos:
     def __init__(self):
         self.cabeza = None
-
-    #Funciones
-    def ultimoProyecto(self): #Función que retorna el ultimo proyecto de la lista
-        if self.cabeza == None:
-            aux = None
-            return aux
-        else:
-            aux = self.cabeza
-            while aux.siguiente != None:
-                aux = aux.siguiente
-        return aux
     
     def agregarProyecto(self,proyecto): #Funcion que agrega un proyecto a la lista
-        ultimo = self.ultimoProyecto()
-        if ultimo != None:
-            ultimo.siguiente = proyecto
-            proyecto.siguiente = None
-        else:
-            self.cabeza = proyecto
+        NodoNuevo = NodoProyectos(proyecto)
+        NodoNuevo.siguiente = self.cabeza
+        self.cabeza = NodoNuevo
+
+    def buscar(self, key):
+        current = self.head
+        while current:
+            if current.data == key:
+                return current
+            current = current.next
+        return None
     
     def crearProyecto(self): #Función que crea un proyecto
         id = input("Ingrese la ID del nuevo proyecto: ")
@@ -71,26 +59,60 @@ class Proyectos:
         empresa = input("Ingrese la empresa que ocupa el proyecto: ")
         gerente = input("Ingrese el gerente que gestiona el proyecto: ")
         equipo = input("Ingrese el equipo encargado del proyecto: ")
-        proyecto = Proyecto(id,nombre,descripcion,fechaInicio,fechaVencimiento,estado,empresa,gerente,equipo)
-        self.agregarProyecto(proyecto)
+        aux = self.cabeza
+        band = True
+        while aux != None:
+            if aux.nombre == nombre or aux.id == id: band = False
+        if band:
+            proyecto = Proyecto(id,nombre,descripcion,fechaInicio,fechaVencimiento,estado,empresa,gerente,equipo)
+            self.agregarProyecto(proyecto)
+        else:
+            print("Ya hay un proyecto con el mismo id o nombre")
 
     def buscarProyecto(self):
+        print("Busqueda del proyecto")
         print("1. Nombre")
         print("2. ID")
         print("3. Empresa")
-        print("4. Equipo")
-        opcion = ("Elige un criterio de busqueda (1,2,3,4): ")
+        print("4. Gerente")
+        opcion = input("Elige un criterio de busqueda (1,2,3,4): ")
         busqueda = input("Ingrese el criterio: ")
-        aux = self.cabeza
-        while aux != None:
-            if opcion == "1" and aux.getNombre == busqueda:
+        return busqueda(self.cabeza,opcion,busqueda)
+    
+    def busqueda(self,aux,op,b):
+        if aux != None:
+            if op == "1" and aux.nombre == b:
                 return aux
-            if opcion == "2" and aux.getId == busqueda:
+            elif op == "2" and aux.id == b:
                 return aux
-            if opcion == "3" and aux.getEmpresa == busqueda:
+            elif op == "3" and aux.empresa == b:
                 return aux
-            if opcion == "4" and aux.getEquipo == busqueda:
+            elif op == "4" and aux.gerente == b:
                 return aux
-            aux = aux.siguiente
-        return print("No hay ningún proyecto con es criterio")
+            self.busqueda(aux.siguiente,op,b)
+        print("No hay ningún proyecto con ese criterio")
+        return None
+    
+    def modificarProyecto(self):
+        viejo = Proyecto("","")
+        viejo.id = input("Ingrese el nuevo ID del proyecto: ")
+        viejo.nombre = input("Ingrese el nuevo nombre del proyecto: ")
+        viejo.descripcion = input("Ingrese la nueva descripción del proyecto: ")
+        viejo.fechaInicio = input("Ingrese la nueva fecha de inicio: ")
+        viejo.fechaVencimiento = input("Ingrese la nueva fecha de vencimiento: ")
+        viejo.estado = input("Ingrese el nuevo estado del proyecto: ")
+        viejo.equipo = input("Ingrese la nueva empresa del proyecto: ")
+        viejo.gerente = input("Ingrese el nuevo gerente del proyecto: ")
+        viejo.equipo = input("Ingrese el nuevo equipo del proyecto: ")
+        self.modificar(self.buscarProyecto(),viejo)
+    def modificar(self,a,b):
+        a = b
+
+while True:
+    lista = Proyectos()
+    p1 = Proyecto("1","alfa")
+    lista.agregarProyecto(p1)
+    p2 = Proyecto("2","beta")
+    lista.agregarProyecto(p2)
+    lista.modificarProyecto()
 
