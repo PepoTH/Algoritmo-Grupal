@@ -1,8 +1,9 @@
-from tareas import Tarea,Tareas
+from tareas import Tareas
+from datetime import datetime
 
 #Clase para la unidad de proyecto
 class Proyecto:
-    def __init__(self,id,nombre,descripcion="",fechaInicio="",fechaVencimiento="",estado="",empresa="",gerente="",equipo=""):
+    def __init__(self,id,nombre,descripcion,fechaInicio,fechaVencimiento,estado,empresa,gerente,equipo):
         self.id = id
         self.nombre = nombre
         self.descripcion = descripcion
@@ -28,7 +29,7 @@ class Proyecto:
         self.equipo = input("Ingrese el nuevo equipo del proyecto: ")
 
     def mostrar(self):
-        print("Id:{}\nNombre:{}\nDescripcion:{}\nFecha de inicio:{}\nFecha de vencimiento:{}\nEstado:{}\nEquipo:{}\nGerente:{}\nEquipo:{}".format(self.id,self.nombre,self.descripcion,self.fechaInicio,self.fechaVencimiento,self.estado,self.empresa,self.gerente,self.equipo))
+        print("Id: {}\nNombre: {}\nDescripcion: {}\nFecha de inicio: {}\nFecha de vencimiento: {}\nEstado: {}\nEquipo: {}\nGerente: {}\nEquipo: {}".format(self.id,self.nombre,self.descripcion,self.fechaInicio,self.fechaVencimiento,self.estado,self.empresa,self.gerente,self.equipo))
 
 #Clase para los nodos de la lista entrelazada
 class NodoProyectos:
@@ -80,7 +81,7 @@ class Proyectos:
         lista = []
         nodo = self.cabeza
         while nodo:
-            lista.append(nodo.proyecto)
+            lista.append(nodo.proyecto.nombre)
             nodo = nodo.siguiente
         return lista
 
@@ -104,12 +105,13 @@ class Proyectos:
         nodo = self.buscarProyecto(nombre)
         if nodo: nodo.proyecto.mostrar()
 
-""" #Prueba
+#Prueba
 lista = Proyectos()
-p1 = Proyecto("1","alfa")
+p1 = Proyecto("1","alfa","Proyecto 1",datetime.now(),datetime.now(),"Completada","UJAP","Santana","JAC")
 lista.agregarProyecto(p1)
-p2 = Proyecto("2","beta")
+p2 = Proyecto("2","beta","Proyecto 2",datetime.now(),datetime.now(),"Completada","UJAP","Santana","JAC")
 lista.agregarProyecto(p2)
+print(lista.listarProyectos())
 lista.modificarProyecto()
 print(lista.listarProyectos())
 lista.crearProyecto()
@@ -117,4 +119,3 @@ print(lista.listarProyectos())
 lista.borrarProyecto()
 print(lista.listarProyectos())
 lista.consultarProyecto()
-"""
