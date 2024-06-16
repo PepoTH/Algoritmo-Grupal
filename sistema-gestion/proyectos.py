@@ -109,7 +109,7 @@ class Proyectos:
 lista = Proyectos()
 p1 = Proyecto("1","alfa","Proyecto 1",datetime.now(),datetime.now(),"Completada","UJAP","Santana","JAC")
 lista.agregarProyecto(p1)
-p2 = Proyecto("2","beta","Proyecto 2",datetime.now(),datetime.now(),"Completada","UJAP","Santana","JAC")
+p2 = Proyecto("2","beta","Proyecto 2",datetime.now(),datetime.now(),"Completada","UJAP","Cesar","JAC")
 lista.agregarProyecto(p2)
 print(lista.listarProyectos())
 lista.modificarProyecto()
