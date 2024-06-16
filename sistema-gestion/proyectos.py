@@ -18,6 +18,7 @@ class Proyecto:
 
     def modificar(self):
         self.id = input("Ingrese el nuevo ID del proyecto: ")
+        self.nombre = input("Ingrese el nuevo nombre del proyecto: ")
         self.descripcion = input("Ingrese la nueva descripción del proyecto: ")
         self.fechaInicio = input("Ingrese la nueva fecha de inicio: ")
         self.fechaVencimiento = input("Ingrese la nueva fecha de vencimiento: ")
@@ -25,13 +26,17 @@ class Proyecto:
         self.equipo = input("Ingrese la nueva empresa del proyecto: ")
         self.gerente = input("Ingrese el nuevo gerente del proyecto: ")
         self.equipo = input("Ingrese el nuevo equipo del proyecto: ")
-        self.nombre = input("Ingrese el nuevo nombre del proyecto: ")
 
+    def mostrar(self):
+        print("Id:{}\nNombre:{}\nDescripcion:{}\nFecha de inicio:{}\nFecha de vencimiento:{}\nEstado:{}\nEquipo:{}\nGerente:{}\nEquipo:{}".format(self.id,self.nombre,self.descripcion,self.fechaInicio,self.fechaVencimiento,self.estado,self.empresa,self.gerente,self.equipo))
+
+#Clase para los nodos de la lista entrelazada
 class NodoProyectos:
     def __init__(self, proyecto):
         self.proyecto = proyecto
         self.siguiente = None
 
+#Clase de la lista entrelazada
 class Proyectos:
     def __init__(self):
         self.cabeza = None
@@ -41,12 +46,12 @@ class Proyectos:
         NodoNuevo.siguiente = self.cabeza
         self.cabeza = NodoNuevo
 
-    def buscar(self, key):
-        current = self.head
-        while current:
-            if current.data == key:
-                return current
-            current = current.next
+    def buscarProyecto(self,nombre): #Función que busca un proyecto por su nombre
+        nodoaux = self.cabeza
+        while nodoaux:
+            if nodoaux.proyecto.nombre == nombre:
+                return nodoaux
+            nodoaux = nodoaux.siguiente
         return None
     
     def crearProyecto(self): #Función que crea un proyecto
@@ -59,60 +64,57 @@ class Proyectos:
         empresa = input("Ingrese la empresa que ocupa el proyecto: ")
         gerente = input("Ingrese el gerente que gestiona el proyecto: ")
         equipo = input("Ingrese el equipo encargado del proyecto: ")
-        aux = self.cabeza
-        band = True
-        while aux != None:
-            if aux.nombre == nombre or aux.id == id: band = False
-        if band:
-            proyecto = Proyecto(id,nombre,descripcion,fechaInicio,fechaVencimiento,estado,empresa,gerente,equipo)
-            self.agregarProyecto(proyecto)
+        p = Proyecto(id,nombre,descripcion,fechaInicio,fechaVencimiento,estado,empresa,gerente,equipo)
+        self.agregarProyecto(p)
+    
+    def modificarProyecto(self): #Función que modifica un proyecto
+        nombre = input("Ingrese el nombre del proyecto a modificar: ")
+        nodo = self.buscarProyecto(nombre)
+        if nodo:
+            nodo.proyecto.modificar()
+            return True
         else:
-            print("Ya hay un proyecto con el mismo id o nombre")
-
-    def buscarProyecto(self):
-        print("Busqueda del proyecto")
-        print("1. Nombre")
-        print("2. ID")
-        print("3. Empresa")
-        print("4. Gerente")
-        opcion = input("Elige un criterio de busqueda (1,2,3,4): ")
-        busqueda = input("Ingrese el criterio: ")
-        return busqueda(self.cabeza,opcion,busqueda)
+            return False
     
-    def busqueda(self,aux,op,b):
-        if aux != None:
-            if op == "1" and aux.nombre == b:
-                return aux
-            elif op == "2" and aux.id == b:
-                return aux
-            elif op == "3" and aux.empresa == b:
-                return aux
-            elif op == "4" and aux.gerente == b:
-                return aux
-            self.busqueda(aux.siguiente,op,b)
-        print("No hay ningún proyecto con ese criterio")
-        return None
+    def listarProyectos(self): #Función que lista todos los proyectos
+        lista = []
+        nodo = self.cabeza
+        while nodo:
+            lista.append(nodo.proyecto)
+            nodo = nodo.siguiente
+        return lista
+
+    def borrarProyecto(self): #Función que borra un proyecto
+        nombre = input("Ingrese el nombre del proyecto a borrar: ")
+        nodo = self.cabeza
+        prev = None
+        while nodo:
+            if nodo.proyecto.nombre == nombre:
+                if prev:
+                    prev.siguiente = nodo.siguiente
+                else:
+                    self.cabeza = nodo.siguiente
+                return True
+            prev = nodo
+            nodo = nodo.siguiente
+        return False
     
-    def modificarProyecto(self):
-        viejo = Proyecto("","")
-        viejo.id = input("Ingrese el nuevo ID del proyecto: ")
-        viejo.nombre = input("Ingrese el nuevo nombre del proyecto: ")
-        viejo.descripcion = input("Ingrese la nueva descripción del proyecto: ")
-        viejo.fechaInicio = input("Ingrese la nueva fecha de inicio: ")
-        viejo.fechaVencimiento = input("Ingrese la nueva fecha de vencimiento: ")
-        viejo.estado = input("Ingrese el nuevo estado del proyecto: ")
-        viejo.equipo = input("Ingrese la nueva empresa del proyecto: ")
-        viejo.gerente = input("Ingrese el nuevo gerente del proyecto: ")
-        viejo.equipo = input("Ingrese el nuevo equipo del proyecto: ")
-        self.modificar(self.buscarProyecto(),viejo)
-    def modificar(self,a,b):
-        a = b
+    def consultarProyecto(self): #Función que consulta un proyecto
+        nombre = input("Ingrese el nombre del proyecto a consultar: ")
+        nodo = self.buscarProyecto(nombre)
+        if nodo: nodo.proyecto.mostrar()
 
-while True:
-    lista = Proyectos()
-    p1 = Proyecto("1","alfa")
-    lista.agregarProyecto(p1)
-    p2 = Proyecto("2","beta")
-    lista.agregarProyecto(p2)
-    lista.modificarProyecto()
-
+""" #Prueba
+lista = Proyectos()
+p1 = Proyecto("1","alfa")
+lista.agregarProyecto(p1)
+p2 = Proyecto("2","beta")
+lista.agregarProyecto(p2)
+lista.modificarProyecto()
+print(lista.listarProyectos())
+lista.crearProyecto()
+print(lista.listarProyectos())
+lista.borrarProyecto()
+print(lista.listarProyectos())
+lista.consultarProyecto()
+"""
