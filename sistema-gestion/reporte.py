@@ -42,3 +42,32 @@ class reporte:
                 #Calculo de Porcentaje respecto al total de tareas
                 porcentaje = terminadas / len(self.proyectos[i].tareas) * 100
                 print(porcentaje + '\n')
+
+    def subtareas(self,filtro):
+        #Arreglar nombre de atributos
+        for i in range(0,len(self.proyectos)-1):
+            #Recorrido de Proyectos
+            if(self.proyectos[i].nombre == filtro or self.proyectos[i].id == filtro):
+                #Verificacion de filtro
+                #Salida por pantalla de datos basicos
+                print('Nombre del proyecto: ',self.proyectos[i].nombre)
+                print('Descripcion del proyecto: ',self.proyectos[i].nombre)
+                print('Tareas del ',self.proyectos[i].nombre, ': ')
+
+                for j in range(0,len(self.proyectos[i].tareas)-1):
+                    #Recorrido de tareas
+                    #Salida por pantalla de datos basicos de la tarea
+                    tarea = self.proyectos[i].tareas[j]
+                    print('\tNombre de la Tarea: ' ,tarea.nombre)
+                    print('\tDescripcion de la Tarea: ' ,tarea.nombre)
+                    print('\tFecha Inicio de la Tarea: ' ,tarea.nombre)
+                    print('\tFecha Final de la Tarea: ' ,tarea.nombre)
+                    print('\tPorcentaje de Finalizacion: ',end='')
+                    terminadas = 0
+                    for j in range(0,len(tarea.subtareas) - 1):
+                        #Recorrido de subtareas
+                        #Contador de estado de subtarea
+                        if(tarea.subtareas[j].estado == 'Completada'):
+                            terminadas += 1
+                    porcentaje = terminadas / len(tarea.subtareas) * 100
+                    print(porcentaje + '\n')
