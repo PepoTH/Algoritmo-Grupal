@@ -13,9 +13,7 @@ class Proyecto:
         self.empresa = empresa
         self.gerente = gerente
         self.equipo = equipo
-
         self.Tareas = Tareas() #Variable que contendrá un dato de tipo 'Tareas'
-        self.siguiente = None #Variable que contendrá el siguiente proyecto
 
     def modificar(self):
         self.id = input("Ingrese el nuevo ID del proyecto: ")
