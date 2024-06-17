@@ -49,7 +49,24 @@ class LTareas:
         nuevoNodo.siguiente = self.cabeza
         self.cabeza = nuevoNodo
     
+    #Funcion que elimina un elemento de la lista
+    def eliminar_tarea(self,id):
+        if not self.cabeza:
+            return
+        if self.cabeza.id == id:
+            self.cabeza = self.cabeza.siguiente
+            return
+        ante = None
+        aux = self.cabeza
+        while aux and aux.id != id:
+            anterior = aux
+            aux = aux.siguiente
+        if aux:
+            anterior.siguiente = aux.siguiente
     
+    
+
+
 
 
 
