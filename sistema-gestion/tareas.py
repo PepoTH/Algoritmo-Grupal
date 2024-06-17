@@ -33,8 +33,8 @@ class LTareas:
         self.cabeza = None
 
     #Funcion que agrega una tarea
-    def agregar_tarea(self,id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc):
-        nuevoNodo = NodoTarea(id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc)
+    def agregar_tarea(self,tarea):
+        nuevoNodo = tarea
         if not self.cabeza:
             self.cabeza = nuevoNodo
         else:
@@ -44,8 +44,8 @@ class LTareas:
             aux.siguiente = nuevoNodo
     
     #Funcion que agrega el elemnto al principio de la lista
-    def agregar_en_el_Inicio(self,id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc):
-        nuevoNodo = NodoTarea(id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc)
+    def agregar_en_el_Inicio(self,tarea):
+        nuevoNodo = tarea
         nuevoNodo.siguiente = self.cabeza
         self.cabeza = nuevoNodo
     
@@ -64,19 +64,75 @@ class LTareas:
         if aux:
             anterior.siguiente = aux.siguiente
     
+    #Funcion que modifica una tarea
+    def modificar_tarea(self,id):
+        aux = self.cabeza
+        nuevo_id = int(input("Ingrese el nuevo id"))
+        nuevo_nom = input("Ingrese el nuevo nombre: ")
+        nuevo_empresa = input("Ingrese la nueva empresa: ")
+        nuevo_cliente = input("Ingrese el nuevo cliente: ")
+        nueva_descri = input("Ingrese la nueva descripcion: ")
+        nueva_FechaI = input("Ingrese la nueva fecha inicio: ")
+        nueva_FechaV = input("Ingrese la nueva fecha de vencimiento: ")
+        nuevo_estado = input("Ingrese el nuevo estado de la tarea: ")
+        nuevo_porc = input("Ingrese el nuevo porcentaje de la tarea %: ")
+        while aux:
+            if aux.id == id:
+                aux.id = nuevo_id
+                aux.nombre = nuevo_nom
+                aux.empresa = nuevo_empresa
+                aux.cliente = nuevo_cliente
+                aux.descrip = nueva_descri
+                aux.fechaI = nueva_FechaI
+                aux.fechaV = nueva_FechaV
+                aux.estado = nuevo_estado
+                aux.porce = nuevo_porc
+                return True
+            aux = aux.siguiente
+        return False
     
-
-
-
-
+    #Funcion que busca una tarea
+    def Buscar_tarea(self,id):
+        aux = self.cabeza
+        while aux:
+            if aux.id == id:
+                return True
+            aux = aux.siguiente
+        return False
+    
+    #Funcion que obtiene la posicion de una lista
+    def Obtener_tarea(self,id):
+        aux = self.cabeza
+        pos = 0
+        ult = -1
+        while aux:
+            if aux.id == id:
+                return pos
+            aux = aux.siguiente
+            pos += 1
+        return ult
+    
+    #Funcion que muestra las tareas
+    def mostrar_tarea(self):
+        aux = self.cabeza
+        while aux:
+            if len(aux.subtareas) == 0:
+                print(aux.id,aux.nombre,aux.empresa,aux.cliente,
+                      aux.descrip,aux.fechaI,aux.fechaV,
+                      aux.estado,aux.porce)
+            else:
+                print(aux.id,aux.nombre,aux.empresa,aux.cliente,
+                      aux.descrip,aux.fechaI,aux.fechaV,
+                      aux.estado,aux.porce,aux.subtareas)
+            aux = aux.siguiente
 
 organ = LTareas()
-tarea1 = NodoTarea(1,"Jose","Alpha","Carlos","Bestia",datetime.now(),datetime.now(),"En progreso","50%")
-tarea2 = NodoTarea(2,"Jose","Alpha","Carlos","Bestia",datetime.now(),datetime.now(),"En progreso","50%")
-tarea3 = NodoTarea(3,"Jose","Alpha","Carlos","Bestia",datetime.now(),datetime.now(),"En progreso","50%")
-organ.agregar_final(tarea1)
-organ.agregar_Primero(tarea2)
-organ.agregar_Primero(tarea3)
-organ.eliminar_tareas()
-organ.Listadetarea()
-
+tarea1 = NodoTarea(1,"Tarea1","Aplha","Jorge","Bestia",datetime.now(),datetime.now(),"En progreso","50%")
+tarea2 = NodoTarea(2,"Tarea2","Omega","Luis","don Juan",datetime.now(),datetime.now(),"Completada","100%")
+tarea3 = NodoTarea(3,"Tarea3","Chi","Susan","wwe",datetime.now(),datetime.now(),"Pendiente","12%")
+organ.agregar_tarea(tarea2)
+organ.agregar_en_el_Inicio(tarea1)
+organ.agregar_tarea(tarea3)
+result = organ.Obtener_tarea(2)
+print(result)
+organ.mostrar_tarea()
