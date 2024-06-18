@@ -104,6 +104,7 @@ class Proyectos:
         if nodo: nodo.proyecto.mostrar()
 
 #Prueba
+"""
 lista = Proyectos()
 p1 = Proyecto("1","alfa","Proyecto 1",datetime.now(),datetime.now(),"Completada","UJAP","Santana","JAC")
 lista.agregarProyecto(p1)
@@ -117,3 +118,4 @@ print(lista.listarProyectos())
 lista.borrarProyecto()
 print(lista.listarProyectos())
 lista.consultarProyecto()
+"""

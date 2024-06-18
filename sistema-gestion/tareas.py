@@ -537,4 +537,4 @@ def organizacionTareas():
             else:
                 organC.mostrar_cola()
 
-ver = organizacionTareas()
+#ver = organizacionTareas()

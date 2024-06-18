@@ -1,3 +1,6 @@
+from tareas import *
+from proyectos import *
+
 class reporte:
     def __init__(self,proyectos):
         self.proyectos = proyectos
