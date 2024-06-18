@@ -249,7 +249,31 @@ class CTareas:
                 return True
             aux = aux.siguiente
         return False
+    #Funcion que obtiene la posicion de la tarea que esta en la cola
+    def Obtener_posi_en_la_cola(self,fechaV):
+        aux = self.cabeza
+        pos = 0
+        term = -1
+        while aux:
+            if aux.fechaV == fechaV:
+                return pos
+            aux = aux.siguiente
+            pos +=1
+        return term
     
+    #Funcion que muestra las tareas que se encuentra dentros de la cola
+    def mostrar_cola(self):
+        aux = self.cabeza
+        while aux:
+            if len(aux.subtareas) == 0:
+                print(aux.id,aux.nombre,aux.empresa,aux.cliente,
+                      aux.descrip,aux.fechaI,aux.fechaV,
+                      aux.estado,aux.porce)
+            else:
+                print(aux.id,aux.nombre,aux.empresa,aux.cliente,
+                      aux.descrip,aux.fechaI,aux.fechaV,
+                      aux.estado,aux.porce,aux.subtareas)
+            aux = aux.siguiente
 
 
 
