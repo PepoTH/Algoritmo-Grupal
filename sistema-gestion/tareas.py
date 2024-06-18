@@ -1,4 +1,5 @@
 from datetime import datetime
+import time
 #Clase para inicializar los valores
 class NodoTarea:
     def __init__(self,id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc):
@@ -23,19 +24,10 @@ class NodoTarea:
         porc = input("Ingrese el porcentaje de la subtarea %: ")
         lista = [id,nom,descri,estado,porc]
         self.subtareas.append(lista)
+
     def eliminar_Subtareas(self):
         self.subtareas.clear()
     
-    def modificar_subTareas(self,id):
-        nuevo_id = int(input("Ingrese el nuevo id"))
-        nuevo_nom = input("Ingrese el nuevo nombre: ")
-        nueva_descri = input("Ingrese la nueva descripcion: ")
-        nuevo_estado = input("Ingrese el nuevo estado de la tarea: ")
-        nuevo_porc = input("Ingrese el nuevo porcentaje de la tarea %: ")
-        listaNueva = [nuevo_id,nuevo_nom,nueva_descri,nuevo_estado,nuevo_porc]
-        for i in range(len(self.subtareas)):
-            if self[i].subtareas == id:
-                self.subtareas.append(listaNueva)
 
         
 
@@ -84,8 +76,14 @@ class LTareas:
         nuevo_empresa = input("Ingrese la nueva empresa: ")
         nuevo_cliente = input("Ingrese el nuevo cliente: ")
         nueva_descri = input("Ingrese la nueva descripcion: ")
-        nueva_FechaI = input("Ingrese la nueva fecha inicio: ")
-        nueva_FechaV = input("Ingrese la nueva fecha de vencimiento: ")
+        yI = int(input("Ingrese el nuevo año de inicio: "))
+        mI = int(input("Ingrese el nuevo mes de inicio:  "))
+        dI = int(input("Ingrese el dia de inicio: "))
+        nueva_FechaI = datetime(yI,mI,dI).strftime("%y %m %d")
+        yV = int(input("Ingrese el nuevo año de vencimiento: "))
+        mV = int(input("Ingrese el nuevo mes de vencimiento:  "))
+        dV = int(input("Ingrese el dia de vencimiento: "))
+        nueva_FechaV = datetime(yV,mV,dV).strftime("%y %m %d")
         nuevo_estado = input("Ingrese el nuevo estado de la tarea: ")
         nuevo_porc = int(input("Ingrese el nuevo porcentaje de la tarea %: "))
         while aux:
@@ -104,10 +102,10 @@ class LTareas:
         return False
     
     #Funcion que busca una tarea
-    def Buscar_tarea(self,id):
+    def Buscar_tarea(self,nombre):
         aux = self.cabeza
         while aux:
-            if aux.id == id:
+            if aux.nombre == nombre:
                 return True
             aux = aux.siguiente
         return False
@@ -155,6 +153,14 @@ class PTareas:
         elimina = self.cima
         self.cima = self.cima.siguiente
         return elimina
+    #Funcion que busca el eleemnto en la Pila y dice si existe o no
+    def Buscar_tarea_Prioritaria(self,porc):
+        actual = self.cabeza
+        while actual:
+            if actual.porce == porc:
+                return True
+            actual = actual.siguiente
+        return False
     #Fucncion que modifica una tarea prioritaria
     def modificar_tarea(self,id):
         aux = self.cima
@@ -163,8 +169,14 @@ class PTareas:
         nuevo_empresa = input("Ingrese la nueva empresa de la tarea prioritaria: ")
         nuevo_cliente = input("Ingrese el nuevo cliente de la tarea prioritaria: ")
         nueva_descri = input("Ingrese la nueva descripcion de la tarea prioritaria: ")
-        nueva_FechaI = input("Ingrese la nueva fecha inicio de la tarea prioritaria: ")
-        nueva_FechaV = input("Ingrese la nueva fecha de vencimiento de la tarea prioritaria: ")
+        yI = int(input("Ingrese el nuevo año de inicio: "))
+        mI = int(input("Ingrese el nuevo mes de inicio:  "))
+        dI = int(input("Ingrese el dia de inicio: "))
+        nueva_FechaI = datetime(yI,mI,dI).strftime("%y %m %d")
+        yV = int(input("Ingrese el nuevo año de vencimiento: "))
+        mV = int(input("Ingrese el nuevo mes de vencimiento:  "))
+        dV = int(input("Ingrese el dia de vencimiento: "))
+        nueva_FechaV = datetime(yV,mV,dV).strftime("%y %m %d")
         nuevo_estado = input("Ingrese el nuevo estado de la tarea de la tarea prioritaria: ")
         nuevo_porc = int(input("Ingrese el nuevo porcentaje de la tarea de la tarea prioritaria %: "))
         while aux:
@@ -224,19 +236,25 @@ class CTareas:
         self.cabeza = self.cabeza.siguiente
         return eliminar
     #Funcion que modifica una tarea segun su fecha de vencimiento
-    def Modifica_tarea_en_la_cola(self,fechaV):
+    def Modifica_tarea_en_la_cola(self,id):
         aux = self.cabeza
-        nuevo_id = int(input("Ingrese el nuevo id de la tarea prioritaria: "))
-        nuevo_nom = input("Ingrese el nuevo nombre de la tarea prioritaria: ")
-        nuevo_empresa = input("Ingrese la nueva empresa de la tarea prioritaria: ")
-        nuevo_cliente = input("Ingrese el nuevo cliente de la tarea prioritaria: ")
-        nueva_descri = input("Ingrese la nueva descripcion de la tarea prioritaria: ")
-        nueva_FechaI = input("Ingrese la nueva fecha inicio de la tarea prioritaria: ")
-        nueva_FechaV = input("Ingrese la nueva fecha de vencimiento de la tarea prioritaria: ")
-        nuevo_estado = input("Ingrese el nuevo estado de la tarea de la tarea prioritaria: ")
-        nuevo_porc = int(input("Ingrese el nuevo porcentaje de la tarea de la tarea prioritaria %: "))
+        nuevo_id = int(input("Ingrese el nuevo id de la tarea : "))
+        nuevo_nom = input("Ingrese el nuevo nombre de la tarea : ")
+        nuevo_empresa = input("Ingrese la nueva empresa de la tarea : ")
+        nuevo_cliente = input("Ingrese el nuevo cliente de la tarea : ")
+        nueva_descri = input("Ingrese la nueva descripcion de la tarea : ")
+        yI = int(input("Ingrese el nuevo año de inicio: "))
+        mI = int(input("Ingrese el nuevo mes de inicio:  "))
+        dI = int(input("Ingrese el dia de inicio: "))
+        nueva_FechaI = datetime(yI,mI,dI).strftime("%y %m %d")
+        yV = int(input("Ingrese el nuevo año de vencimiento: "))
+        mV = int(input("Ingrese el nuevo mes de vencimiento:  "))
+        dV = int(input("Ingrese el dia de vencimiento: "))
+        nueva_FechaV = datetime(yV,mV,dV).strftime("%y %m %d")
+        nuevo_estado = input("Ingrese el nuevo estado de la tarea de la tarea : ")
+        nuevo_porc = int(input("Ingrese el nuevo porcentaje de la tarea de la tarea  %: "))
         while aux:
-            if aux.fechaV == fechaV:
+            if aux.id== id:
                 aux.id = nuevo_id
                 aux.nombre = nuevo_nom
                 aux.empresa = nuevo_empresa
@@ -274,35 +292,249 @@ class CTareas:
                       aux.descrip,aux.fechaI,aux.fechaV,
                       aux.estado,aux.porce,aux.subtareas)
             aux = aux.siguiente
+#Funcion que elige que metodo quiere utilizar para organizar las tareas
+def organizacionTareas():
+    tarea1 = NodoTarea(1,"Tarea1","Empresa1","Cliente1","Descripcion1",datetime(2016,12,2).strftime("%y %m %d")
+    ,datetime(2025,7,12).strftime("%y %m %d"),"En progreso",65)
+    print("Desea agregar una subtarea a la tarea1? (S/N)")
+    agreSub = input(" : ")
+    if (agreSub.upper() == "S"):
+        tarea1.agregar_subTareas()
+    else:
+        print()
+    print("Desea Eliminar una subTarea (S/N)")
+    elimSub = input(" : ")
+    if (elimSub.upper() == "S"):
+        tarea1.eliminar_Subtareas()
+    else:
+        print()
+    tarea2 = NodoTarea(2,"Tarea2","Empresa2","Cliente2","Descripcion2",datetime(2022,4,12).strftime("%y %m %d")
+    ,datetime(2024,9,30).strftime("%y %m %d"),"Pendiente",15)
 
+    print("Desea agregar una subtarea a la tarea2? (S/N)")
+    agreSub = input(" : ")
+    if (agreSub.upper() == "S"):
+        tarea2.agregar_subTareas()
+    else:
+        print()
+    print("Desea Eliminar una subTarea (S/N)")
+    elimSub = input(" : ")
+    if (elimSub.upper() == "S"):
+        tarea2.eliminar_Subtareas()
+    else:
+        print()
 
+    tarea3 = NodoTarea(3,"Tarea3","Empresa3","Cliente3","Descripcion3",datetime(2012,3,6).strftime("%y %m %d")
+    ,datetime(2024,8,12).strftime("%y %m %d"),"Completada",45)
 
-organ = LTareas()
-tarea1 = NodoTarea(1,"Tarea1","Aplha","Jorge","Bestia",datetime.now().strftime("%y-%m-%d"),datetime.now().strftime("%y-%m-%d"),"En progreso",50)
-tarea2 = NodoTarea(2,"Tarea2","Omega","Luis","don Juan",datetime.now().strftime("%y-%m-%d"),datetime.now().strftime("%y-%m-%d"),"Completada",100)
-tarea3 = NodoTarea(3,"Tarea3","Chi","Susan","wwe",datetime.now().strftime("%y-%m-%d"),datetime.now().strftime("%y-%m-%d"),"Pendiente",12)
-organ.agregar_tarea(tarea2)
-organ.agregar_en_el_Inicio(tarea1)
-organ.agregar_tarea(tarea3)
-organ.mostrar_tarea()
-print("-----------------------------------------------------------")
-organP = PTareas()
-if(tarea1.porce < tarea2.porce and tarea3.porce < tarea2.porce):
-    organP.agregar_TareaPrior(tarea2)
-    organP.agregar_TareaPrior(tarea1)
-    organP.agregar_TareaPrior(tarea3)
-else:
-    print("No esta bien organizada")
+    print("Desea agregar una subtarea a la tarea3? (S/N)")
+    agreSub = input(" : ")
+    if (agreSub.upper() == "S"):
+        tarea3.agregar_subTareas()
+    else:
+        print()
+    print("Desea Eliminar una subTarea (S/N)")
+    elimSub = input(" : ")
+    if (elimSub.upper() == "S"):
+        tarea3.eliminar_Subtareas()
+    else:
+        print()
 
-eliminado = organP.eliminar_tareaPrior()
-if eliminado:
-    organP.mostrar_tareaPri()
-else:
-    print("La lista esta vacia")
+    print("Hola como quieres organizar las tareas del proyecto: ")
+    print("1.Lista entrelazadas")
+    print("2.Pila")
+    print("3.Cola")
+    opc = int(input("Ingrese una opcion: "))
+    if (opc == 1):
+        organL = LTareas()
+        agregar = input("Quiere agregar tareas? (S/N) ")
+        if (agregar == "S"):
+            print("Que tarea quiere agregar al inicio de la lista: 1.Tarea1, 2.Tarea2, 3.Tarea3: ")
+            opc1 = int(input(" : "))
+            if (opc1 == 1):
+                organL.agregar_en_el_Inicio(tarea1)
+                organL.agregar_tarea(tarea2)
+                organL.agregar_tarea(tarea3)
+            elif(opc1 == 2):
+                organL.agregar_en_el_Inicio(tarea2)
+                organL.agregar_tarea(tarea1)
+                organL.agregar_tarea(tarea3)
+            else:
+                organL.agregar_en_el_Inicio(tarea3)
+                organL.agregar_tarea(tarea2)
+                organL.agregar_tarea(tarea3)
+        else:
+            print("No se agrego nada a la lista!!")
+        print("Desea eliminar una tarea: (S/N):")
+        opc2 = input(" : ")
+        if (opc2.upper() == "S"):
+            print("Ingrese el id de la tarea que quiere eliminar")
+            id = int(input(":"))
+            if (id == 1):
+                organL.eliminar_tarea(1)
+            elif(id == 2):
+                organL.eliminar_tarea(2)
+            else:
+                organL.eliminar_tarea(3)
+        else:
+            print("No se elimino nada de la lista")
+        print("Desea modificar una tarea: (S/N):")
+        opc3 = input(" : ")
+        if (opc3.upper() == "S"):
+            print("Ingrese el id de la tarea que quiere modificar ")
+            id = int(input(" : "))
+            if (id == 1):
+                organL.modificar_tarea(1)
+            elif(id == 2):
+                organL.modificar_tarea(2)
+            else:
+                organL.modificar_tarea(3)
+        else:
+            print("No se elimino nada de la lista")
+        
+        print("Quiere hacer algo mas? (S/N)")
+        opc4 = input(" : ")
+        if (opc4.upper() == "N"):
+            organL.mostrar_tarea()
+        else:
+            print("Quiere buscar un elemento? (S/N)")
+            opc5 = input(" : ")
+            if (opc5.upper() == "S"):
+                nom = input("Ingrese el nombre de la tarea: ")
+                result = organL.Buscar_tarea(nom)
+                print("Existen la tarea:", result)
+            else:
+                organL.mostrar_tarea()
+    elif (opc == 2):
+        organP = PTareas()
+        agregar = input("Quiere agregar tareas prioritaria (S/N): ")
+        if (agregar.upper() == "S"):
+            if(tarea2.porce < tarea1.porce and tarea1.porce < tarea3.porce):
+                organP.agregar_TareaPrior(tarea3)
+                organP.agregar_TareaPrior(tarea1)
+                organP.agregar_TareaPrior(tarea2)
+            elif(tarea1.porce < tarea2.porce and tarea2.porce < tarea3.porce):
+                organP.agregar_TareaPrior(tarea3)
+                organP.agregar_TareaPrior(tarea2)
+                organP.agregar_TareaPrior(tarea1)
+            elif(tarea3.porce < tarea1.porce and tarea1.porce < tarea2.porce):
+                organP.agregar_TareaPrior(tarea2)
+                organP.agregar_TareaPrior(tarea1)
+                organP.agregar_TareaPrior(tarea3)
+            else:
+                print("Esta mal organizado")
+        print("Desea Eliminar una tarea prioritaria? (S/N)")
+        eliminar = input(" : ")
+        if (eliminar.upper() == "S"):
+            eliminado = organP.eliminar_tareaPrior()
+        else:
+            print("No se elimino tarea prioritaria")
+        print("Desea Modificar una tarea prioritaria? (S/N)")
+        modificar = input(" : ")
+        if (modificar.upper() == "S"):
+            print("Ingrese el id de la tarea prioritaria que quiere modificar")
+            id = int(input(" : "))
+            if (id == 1):
+                organP.modificar_tarea(1)
+                if(tarea1.porce < tarea2.porce and tarea2.porce < tarea3.porce):
+                    organP.agregar_TareaPrior(tarea3)
+                    organP.agregar_TareaPrior(tarea2)
+                    organP.agregar_TareaPrior(tarea1)
+            elif(id == 2):
+                organP.modificar_tarea(2)
+                if(tarea2.porce < tarea1.porce and tarea1.porce < tarea3.porce):
+                    organP.agregar_TareaPrior(tarea3)
+                    organP.agregar_TareaPrior(tarea1)
+                    organP.agregar_TareaPrior(tarea2)
+            else:
+                organP.modificar_tarea(3)
+                if(tarea3.porce < tarea2.porce and tarea2.porce < tarea1.porce):
+                    organP.agregar_TareaPrior(tarea1)
+                    organP.agregar_TareaPrior(tarea2)
+                    organP.agregar_TareaPrior(tarea3)
+        else:
+            print("No se modifico ninguna tarea prioritaria")
+        
+        print("Quiere hacer algo mas: (S/N)")
+        mostrar = input(" : ")
+        if(mostrar.upper() == "N"):
+            organP.mostrar_tareaPri()
+        else:
+            print("Quiere buscar un elemento? (S/N)")
+            opc5 = input(" : ")
+            if (opc5.upper() == "S"):
+                porc = int(input("Ingrese el porcentaje que tiene la tarea prioritaria: "))
+                result = organP.Buscar_tarea_Prioritaria(porc)
+                print("Existen la tarea:", result)
+            else:
+                organP.mostrar_tareaPri()
+    elif(opc == 3):
+        organC = CTareas()
+        agregar = input("Quiere agregar tareas? (S/N): ")
+        if (agregar.upper() == "S"):
+            fechaV1 = time.strptime(tarea1.fechaV,"%y %m %d")
+            fechaV2 = time.strptime(tarea2.fechaV,"%y %m %d")
+            fechaV3 = time.strptime(tarea3.fechaV,"%y %m %d")
+            if(fechaV2 < fechaV1 and fechaV1 < fechaV3):
+                organC.agregar_tarea_a_la_Cola(tarea2)
+                organC.agregar_tarea_a_la_Cola(tarea1)
+                organC.agregar_tarea_a_la_Cola(tarea3)
+            elif(fechaV1 < fechaV2 and fechaV2 < fechaV3):
+                organC.agregar_tarea_a_la_Cola(tarea1)
+                organC.agregar_tarea_a_la_Cola(tarea2)
+                organC.agregar_tarea_a_la_Cola(tarea3)
+            elif(fechaV3 < fechaV2 and fechaV2 < fechaV1):
+                organC.agregar_tarea_a_la_Cola(tarea3)
+                organC.agregar_tarea_a_la_Cola(tarea2)
+                organC.agregar_tarea_a_la_Cola(tarea1)
+        else:
+            print("Cola vacia o no se agrego nada")
+        print("Desea eliminar una tarea? (S/N)")
+        eliminar = input(":")
+        if(eliminar.upper() == "S"):
+            eliminado = organC.Eliminar_tarea_en_la_cola()
+        else:
+            print("No se elimino nada ninguna tarea")
+        print("Desea modificar una tarea")
+        modificar = input(" : ")
+        if(modificar.upper() == "S"):
+            id = int(input(" : "))
+            fechaV1 = time.strptime(tarea1.fechaV,"%y %m %d")
+            fechaV2 = time.strptime(tarea2.fechaV,"%y %m %d")
+            fechaV3 = time.strptime(tarea3.fechaV,"%y %m %d")
+            if (id == 1):
+                organC.Modifica_tarea_en_la_cola(1)
+                if(fechaV1 < fechaV2 and fechaV2 < fechaV3):
+                    organC.agregar_tarea_a_la_Cola(tarea3)
+                    organC.agregar_tarea_a_la_Cola(tarea2)
+                    organC.agregar_tarea_a_la_Cola(tarea1)
+            elif(id == 2):
+                organC.Modifica_tarea_en_la_cola(2)
+                if(fechaV2 < fechaV1 and fechaV1 < fechaV3):
+                    organC.agregar_tarea_a_la_Cola(tarea3)
+                    organC.agregar_tarea_a_la_Cola(tarea1)
+                    organC.agregar_tarea_a_la_Cola(tarea2)
+            else:
+                organC.Modifica_tarea_en_la_cola(3)
+                if(fechaV3 < fechaV2 and fechaV2 < fechaV1):
+                    organC.agregar_tarea_a_la_Cola(tarea1)
+                    organC.agregar_tarea_a_la_Cola(tarea2)
+                    organC.agregar_tarea_a_la_Cola(tarea3)
+        else:
+            print("No se modifico ninguna tarea")
 
-print("------------------------------------------------------------")
+        print("Quiere hacer algo mas: (S/N)")
+        mostrar = input(" : ")
+        if(mostrar.upper() == "N"):
+            organC.mostrar_cola()
+        else:
+            print("Quiere buscar un elemento? (S/N)")
+            opc5 = input(" : ")
+            if (opc5.upper() == "S"):
+                fechaV = int(input("Ingrese el porcentaje que tiene la tarea prioritaria: "))
+                result = organP.Buscar_tarea_Prioritaria(porc)
+                print("Existen la tarea:", result)
+            else:
+                organC.mostrar_cola()
 
-organC = CTareas()
-organC.agregar_tarea_a_la_Cola(tarea1)
-organC.agregar_tarea_a_la_Cola(tarea2)
-organC.agregar_tarea_a_la_Cola(tarea3)
+ver = organizacionTareas()
