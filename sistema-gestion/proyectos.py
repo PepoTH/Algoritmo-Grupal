@@ -1,5 +1,5 @@
-from tareas import Tareas
 from datetime import datetime
+from tareas import *
 
 #Clase para la unidad de proyecto
 class Proyecto:
@@ -13,7 +13,10 @@ class Proyecto:
         self.empresa = empresa
         self.gerente = gerente
         self.equipo = equipo
-        self.Tareas = Tareas() #Variable que contendrá un dato de tipo 'Tareas'
+        self.Tareas = [] #Variable que contendrá un dato de tipo 'Tareas'
+
+    def crearTarea(self,id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc):
+        self.Tareas.append(NodoTarea(id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc))
 
     def modificar(self):
         self.id = input("Ingrese el nuevo ID del proyecto: ")
