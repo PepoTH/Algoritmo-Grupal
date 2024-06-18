@@ -155,6 +155,32 @@ class PTareas:
         elimina = self.cima
         self.cima = self.cima.siguiente
         return elimina
+    #Fucncion que modifica una tarea prioritaria
+    def modificar_tarea(self,id):
+        aux = self.cima
+        nuevo_id = int(input("Ingrese el nuevo id de la tarea prioritaria: "))
+        nuevo_nom = input("Ingrese el nuevo nombre de la tarea prioritaria: ")
+        nuevo_empresa = input("Ingrese la nueva empresa de la tarea prioritaria: ")
+        nuevo_cliente = input("Ingrese el nuevo cliente de la tarea prioritaria: ")
+        nueva_descri = input("Ingrese la nueva descripcion de la tarea prioritaria: ")
+        nueva_FechaI = input("Ingrese la nueva fecha inicio de la tarea prioritaria: ")
+        nueva_FechaV = input("Ingrese la nueva fecha de vencimiento de la tarea prioritaria: ")
+        nuevo_estado = input("Ingrese el nuevo estado de la tarea de la tarea prioritaria: ")
+        nuevo_porc = int(input("Ingrese el nuevo porcentaje de la tarea de la tarea prioritaria %: "))
+        while aux:
+            if aux.id == id:
+                aux.id = nuevo_id
+                aux.nombre = nuevo_nom
+                aux.empresa = nuevo_empresa
+                aux.cliente = nuevo_cliente
+                aux.descrip = nueva_descri
+                aux.fechaI = nueva_FechaI
+                aux.fechaV = nueva_FechaV
+                aux.estado = nuevo_estado
+                aux.porce = nuevo_porc
+                return True
+            aux = aux.siguiente
+        return False
     #Funcion que muestra las tareas prioritarias  
     def mostrar_tareaPri(self):
         aux = self.cima
@@ -182,5 +208,7 @@ if(tarea1.porce < tarea2.porce and tarea3.porce < tarea2.porce):
     organP.agregar_TareaPrior(tarea2)
     organP.agregar_TareaPrior(tarea1)
     organP.agregar_TareaPrior(tarea3)
-    organP.mostrar_tareaPri()
-    result = organP.mostrar_Cima()
+else:
+    print("No esta bien organizada")
+organP.modificar_tarea(1)
+organP.mostrar_tareaPri()
