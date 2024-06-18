@@ -194,10 +194,69 @@ class PTareas:
                       aux.descrip,aux.fechaI,aux.fechaV,
                       aux.estado,aux.porce,aux.subtareas)
             aux = aux.siguiente
+class CTareas:
+    def __init__(self):
+        self.cabeza = None
+        self.cola = None
+    #Funcion que agrega una tarea
+    def agregar_tarea_a_la_Cola(self,tarea):
+        nuevoNodo = tarea
+        if not self.cabeza:
+            self.cabeza = nuevoNodo
+            self.cola = nuevoNodo
+        else:
+            self.cola.siguiente = nuevoNodo
+            self.cola = nuevoNodo
+    
+    #Funcion que busca una tarea segun su id
+    def Buscar_tarea_en_la_cola(self,fechaV):
+        aux = self.cabeza
+        while aux:
+            if aux.fechaV == fechaV:
+                return True
+            aux = aux.siguiente
+        return False
+    #Funcion que elimina un elemento de la cola
+    def Eliminar_tarea_en_la_cola(self):
+        if not self.cabeza:
+            return None
+        eliminar = self.cabeza
+        self.cabeza = self.cabeza.siguiente
+        return eliminar
+    #Funcion que modifica una tarea segun su fecha de vencimiento
+    def Modifica_tarea_en_la_cola(self,fechaV):
+        aux = self.cabeza
+        nuevo_id = int(input("Ingrese el nuevo id de la tarea prioritaria: "))
+        nuevo_nom = input("Ingrese el nuevo nombre de la tarea prioritaria: ")
+        nuevo_empresa = input("Ingrese la nueva empresa de la tarea prioritaria: ")
+        nuevo_cliente = input("Ingrese el nuevo cliente de la tarea prioritaria: ")
+        nueva_descri = input("Ingrese la nueva descripcion de la tarea prioritaria: ")
+        nueva_FechaI = input("Ingrese la nueva fecha inicio de la tarea prioritaria: ")
+        nueva_FechaV = input("Ingrese la nueva fecha de vencimiento de la tarea prioritaria: ")
+        nuevo_estado = input("Ingrese el nuevo estado de la tarea de la tarea prioritaria: ")
+        nuevo_porc = int(input("Ingrese el nuevo porcentaje de la tarea de la tarea prioritaria %: "))
+        while aux:
+            if aux.fechaV == fechaV:
+                aux.id = nuevo_id
+                aux.nombre = nuevo_nom
+                aux.empresa = nuevo_empresa
+                aux.cliente = nuevo_cliente
+                aux.descrip = nueva_descri
+                aux.fechaI = nueva_FechaI
+                aux.fechaV = nueva_FechaV
+                aux.estado = nuevo_estado
+                aux.porce = nuevo_porc
+                return True
+            aux = aux.siguiente
+        return False
+    
+
+
+
 organ = LTareas()
-tarea1 = NodoTarea(1,"Tarea1","Aplha","Jorge","Bestia",datetime.now(),datetime.now(),"En progreso",50)
-tarea2 = NodoTarea(2,"Tarea2","Omega","Luis","don Juan",datetime.now(),datetime.now(),"Completada",100)
-tarea3 = NodoTarea(3,"Tarea3","Chi","Susan","wwe",datetime.now(),datetime.now(),"Pendiente",12)
+tarea1 = NodoTarea(1,"Tarea1","Aplha","Jorge","Bestia",datetime.now().strftime("%y-%m-%d"),datetime.now().strftime("%y-%m-%d"),"En progreso",50)
+tarea2 = NodoTarea(2,"Tarea2","Omega","Luis","don Juan",datetime.now().strftime("%y-%m-%d"),datetime.now().strftime("%y-%m-%d"),"Completada",100)
+tarea3 = NodoTarea(3,"Tarea3","Chi","Susan","wwe",datetime.now().strftime("%y-%m-%d"),datetime.now().strftime("%y-%m-%d"),"Pendiente",12)
 organ.agregar_tarea(tarea2)
 organ.agregar_en_el_Inicio(tarea1)
 organ.agregar_tarea(tarea3)
@@ -210,5 +269,16 @@ if(tarea1.porce < tarea2.porce and tarea3.porce < tarea2.porce):
     organP.agregar_TareaPrior(tarea3)
 else:
     print("No esta bien organizada")
-organP.modificar_tarea(1)
-organP.mostrar_tareaPri()
+
+eliminado = organP.eliminar_tareaPrior()
+if eliminado:
+    organP.mostrar_tareaPri()
+else:
+    print("La lista esta vacia")
+
+print("------------------------------------------------------------")
+
+organC = CTareas()
+organC.agregar_tarea_a_la_Cola(tarea1)
+organC.agregar_tarea_a_la_Cola(tarea2)
+organC.agregar_tarea_a_la_Cola(tarea3)
