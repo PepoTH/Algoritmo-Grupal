@@ -82,6 +82,14 @@ class Proyectos:
         empresa = input("Ingrese la empresa que ocupa el proyecto: ")
         gerente = input("Ingrese el gerente que gestiona el proyecto: ")
         equipo = input("Ingrese el equipo encargado del proyecto: ")
+
+        tareas = input("Desea agregar tareas?(s/n): ")
+
+        if(tareas=='s'):
+            #tareas = 
+            pass
+        else:
+            tareas = []
         #Vinculacion con Tareas y  Subtareas
 
         data = {}
@@ -126,8 +134,6 @@ class Proyectos:
         empresa = input("Ingrese la nueva empresa del proyecto: ")
         gerente = input("Ingrese el nuevo gerente del proyecto: ")
         equipo = input("Ingrese el nuevo equipo del proyecto: ")
-
-
 
         for elemento in data['Proyectos']:
             if(elemento['Nombre'] == nombre_viejo):

@@ -7,7 +7,8 @@ class reporte:
             with open('datos.json', 'r') as f:
                 data = json.load(f)
                 #ARREGLAR ESTO PONER todo DENTRO
-                self.proyectos = [Proyecto for p in data]
+                self.proyectos = data['Proyectos']
+                #self.proyectos = [Proyecto for p in data]
         else:
             self.proyectos = proyectos
 
