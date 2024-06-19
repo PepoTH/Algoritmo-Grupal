@@ -15,9 +15,9 @@ def redigir(opcion):
         elif(subopcion == 2):
             proyecto.modificarProyecto()
         elif(subopcion == 3):
-            proyecto.borrarProyecto()
+            proyecto.borrarProyectoJSON()
         elif(subopcion == 4):
-            proyecto.consultarProyecto()
+            proyecto.consultarProyectoJSON()
 
     elif(opcion == 2):
         print('\tTAREAS\t')

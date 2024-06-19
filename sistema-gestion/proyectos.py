@@ -19,8 +19,6 @@ class Proyecto:
     def crearTarea(self,id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc):
         self.Tareas.append(NodoTarea(id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc))
 
-    def modificar(self,nombre):
-        pass
 
     def mostrar(self):
         print("Id: {}\nNombre: {}\nDescripcion: {}\nFecha de inicio: {}\nFecha de vencimiento: {}\nEstado: {}\nEquipo: {}\nGerente: {}\nEquipo: {}".format(self.id,self.nombre,self.descripcion,self.fechaInicio,self.fechaVencimiento,self.estado,self.empresa,self.gerente,self.equipo))
@@ -32,7 +30,7 @@ class NodoProyectos:
         self.siguiente = None
 
 #Clase de la lista entrelazada
-class Proyectos:
+class Proyectos: 
     def __init__(self):
         self.cabeza = None
     
@@ -48,6 +46,32 @@ class Proyectos:
                 return nodoaux
             nodoaux = nodoaux.siguiente
         return None
+    
+    def borrarProyectoJSON(self):
+        nombre = input("Ingrese el nombre del proyecto a borrar: ")
+        with open('datos.json', 'r') as file:
+            data = json.load(file)
+        for i, proyecto in enumerate(data['Proyectos']):
+            if proyecto['Nombre'] == nombre:
+                del data['Proyectos'][i]
+                with open('datos.json', 'w') as file:
+                    json.dump(data, file, indent=4)
+                print("Proyecto eliminado con éxito")
+                return
+        print("Proyecto no encontrado")
+    
+    def consultarProyectoJSON(self):
+        nombre = input("Ingrese el nombre del proyecto a consultar: ")
+        with open('datos.json', 'r') as file:
+            data = json.load(file)
+        for proyecto in data['Proyectos']:
+            if proyecto['Nombre'] == nombre:
+                print("Id: {}\nNombre: {}\nDescripcion: {}\nFecha de inicio: {}\nFecha de vencimiento: {}\nEstado: {}\nEquipo: {}\nGerente: {}\nEmpresa: {}".format(
+                    proyecto['ID'], proyecto['Nombre'], proyecto['Descripcion'], proyecto['Fecha de Inicio'], proyecto['Fecha de Vencimiento'], proyecto['Estado'], proyecto['Equipo'], proyecto['Gerente'], proyecto['Empresa']
+                ))
+                return
+        print("Proyecto no encontrado")
+    
     
     def crearProyecto(self): #Función que crea un proyecto
         id = input("Ingrese la ID del nuevo proyecto: ")
