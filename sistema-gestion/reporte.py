@@ -6,7 +6,8 @@ class reporte:
         if proyectos is None:
             with open('datos.json', 'r') as f:
                 data = json.load(f)
-                self.proyectos = [Proyecto.from_dict(p) for p in data]
+                #ARREGLAR ESTO PONER todo DENTRO
+                self.proyectos = [Proyecto for p in data]
         else:
             self.proyectos = proyectos
 
@@ -77,6 +78,7 @@ class reporte:
                 porcentaje = terminadas / len(self.proyectos[i].Tareas) * 100
                 print(porcentaje + '\n')
 
+    #ARREGLAR ESTE METODO Y AGREGAR EL OTRO
     def subtareas(self,filtro):
         #Arreglar nombre de atributos
         for i in range(0,len(self.proyectos)-1):

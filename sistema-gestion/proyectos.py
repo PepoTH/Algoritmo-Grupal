@@ -19,7 +19,6 @@ class Proyecto:
     def crearTarea(self,id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc):
         self.Tareas.append(NodoTarea(id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc))
 
-
     def mostrar(self):
         print("Id: {}\nNombre: {}\nDescripcion: {}\nFecha de inicio: {}\nFecha de vencimiento: {}\nEstado: {}\nEquipo: {}\nGerente: {}\nEquipo: {}".format(self.id,self.nombre,self.descripcion,self.fechaInicio,self.fechaVencimiento,self.estado,self.empresa,self.gerente,self.equipo))
 
