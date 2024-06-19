@@ -82,6 +82,7 @@ class Proyectos:
         empresa = input("Ingrese la empresa que ocupa el proyecto: ")
         gerente = input("Ingrese el gerente que gestiona el proyecto: ")
         equipo = input("Ingrese el equipo encargado del proyecto: ")
+        #Vinculacion con Tareas y  Subtareas
 
         data = {}
         data['Proyectos'] = []
