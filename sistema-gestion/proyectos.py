@@ -73,7 +73,7 @@ class Proyectos:
     
     
     def crearProyecto(self): #Función que crea un proyecto
-        id = input("Ingrese la ID del nuevo proyecto: ")
+        id = int(input("Ingrese la ID del nuevo proyecto: "))
         nombre = input("Ingrese el nombre del proyecto: ")
         descripcion = input("Ingrese la descripcion del proyecto: ")
         fechaInicio = input("Ingrese la fecha en la que inicia el proyecto: ")
@@ -99,8 +99,6 @@ class Proyectos:
         with open('datos.json', 'r') as file:
             data = json.load(file)
 
-        print(agregartareas)
-
         data['Proyectos'].append({
         'ID': id,
         'Nombre': nombre,
@@ -112,7 +110,15 @@ class Proyectos:
         'Gerente': gerente,
         'Equipo': equipo ,
         'tareas': [{
-
+            'ID':'',
+            'Nombre': '',
+            'Cliente': '',
+            'Descripcion': '',
+            'Fecha de Inicio': '',
+            'Fecha de Vencimiento': '',
+            'Estado': '',
+            'Empresa': '',
+            'Porcentaje': ''  
         }]
         })  
 
@@ -122,10 +128,31 @@ class Proyectos:
                 index = i
                 break
 
-        print(data['Proyectos'][index]['tareas'])
+        print('\n\n', data['Proyectos'][index]['tareas'], '\n\n')
+
 
         for j in range(0,len(agregartareas)):
-            data['Proyectos'][index]['tareas'].append(agregartareas[j])
+            tarea_id = data['Proyectos'][index]['tareas'].id
+            tarea_name = data['Proyectos'][index]['tareas'].nombre
+            tarea_empresa = data['Proyectos'][index]['tareas'].empresa
+            tarea_cliente = data['Proyectos'][index]['tareas'].cliente
+            tarea_descripcion = data['Proyectos'][index]['tareas'].descripcion
+            tarea_fechaI = data['Proyectos'][index]['tareas'].fechaI
+            tarea_fechaV = data['Proyectos'][index]['tareas'].fechaV
+            tarea_estado = data['Proyectos'][index]['tareas'].estado
+            tarea_porce = data['Proyectos'][index]['tareas'].porce
+
+            data['Proyectos'][index]['tareas'].append({
+                'ID':tarea_id,
+                'Nombre': tarea_name,
+                'Cliente': tarea_cliente,
+                'Descripcion': tarea_descripcion,
+                'Fecha de Inicio': tarea_fechaI,
+                'Fecha de Vencimiento': tarea_fechaV,
+                'Estado': tarea_estado,
+                'Empresa': tarea_empresa,
+                'Porcentaje': tarea_porce
+            })
               
 
         with open('datos.json','w') as file:
