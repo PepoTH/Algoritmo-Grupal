@@ -30,6 +30,9 @@ class Proyecto:
         self.gerente = input("Ingrese el nuevo gerente del proyecto: ")
         self.equipo = input("Ingrese el nuevo equipo del proyecto: ")
 
+        data = {}
+        data['Proyectos'] = []
+
     def mostrar(self):
         print("Id: {}\nNombre: {}\nDescripcion: {}\nFecha de inicio: {}\nFecha de vencimiento: {}\nEstado: {}\nEquipo: {}\nGerente: {}\nEquipo: {}".format(self.id,self.nombre,self.descripcion,self.fechaInicio,self.fechaVencimiento,self.estado,self.empresa,self.gerente,self.equipo))
 
@@ -83,6 +86,9 @@ class Proyectos:
 
         with open('datos.json','w') as file:
             json.dump(data,file,indent=4)
+
+        
+        print(data['Proyectos'])
 
         p = Proyecto(id,nombre,descripcion,fechaInicio,fechaVencimiento,estado,empresa,gerente,equipo)
         self.agregarProyecto(p)

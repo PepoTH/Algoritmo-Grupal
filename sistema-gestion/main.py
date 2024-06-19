@@ -29,11 +29,11 @@ def redigir(opcion):
 opcion = 999    
 while opcion != 0:
     print('\tModulos\t')
-    print('-1 Proyectos')
-    print('-2 Tareas')
-    print('-3 Subtareas')
-    print('-4 Consultas - Reportes')
-    print('-0 Finalizar')
+    print('1- Proyectos')
+    print('2- Tareas')
+    print('3- Subtareas')
+    print('4- Consultas - Reportes')
+    print('5- Finalizar')
     opcion = int(input('Ingrese una opcion: '))
     if opcion in [1,2,3,4]:
         redigir(opcion)
