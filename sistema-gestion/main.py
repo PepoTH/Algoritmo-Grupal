@@ -25,6 +25,20 @@ def redigir(opcion):
         print('\tSUBTAREAS\t')
     elif(opcion == 4):
         print('\tCONSULTAS - REPORTES\t')
+        print('1- Consulta de Tareas por Estado')
+        print('2- Filtrado por Fecha')
+        print('3- Filtrado de proyectos')
+        print('4- Listarsubtareas')
+        subopcion = int(input('Ingrese la opcion deseada: '))
+        proyecto = Proyectos()
+        if(subopcion == 1):
+            proyecto.crearProyecto()
+        elif(subopcion == 2):
+            proyecto.modificarProyecto()
+        elif(subopcion == 3):
+            proyecto.borrarProyectoJSON()
+        elif(subopcion == 4):
+            proyecto.consultarProyectoJSON()
 
 opcion = 999    
 while opcion != 0:

@@ -2,8 +2,13 @@ from tareas import *
 from proyectos import *
 
 class reporte:
-    def __init__(self,proyectos):
-        self.proyectos = proyectos.listarProyectos()
+    def __init__(self, proyectos=None):
+        if proyectos is None:
+            with open('proyectos.json', 'r') as f:
+                data = json.load(f)
+                self.proyectos = [Proyecto.from_dict(p) for p in data]
+        else:
+            self.proyectos = proyectos
 
     def tareas(self,estado):
         #Arreglar los nombres de los atributos de ls proyectos
