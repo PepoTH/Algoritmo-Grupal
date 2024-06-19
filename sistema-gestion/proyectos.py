@@ -1,5 +1,6 @@
 from datetime import datetime
 from tareas import *
+import json
 
 #Clase para la unidad de proyecto
 class Proyecto:
@@ -66,6 +67,23 @@ class Proyectos:
         empresa = input("Ingrese la empresa que ocupa el proyecto: ")
         gerente = input("Ingrese el gerente que gestiona el proyecto: ")
         equipo = input("Ingrese el equipo encargado del proyecto: ")
+
+        data = {}
+        data['Proyectos'] = []
+        data['Proyectos'].append({
+        'ID': id,
+        'Nombre': nombre,
+        'Descripcion': descripcion,
+        'Fecha de Inicio': fechaInicio,
+        'Fecha de Vencimiento': fechaVencimiento,
+        'Estado': estado,
+        'Empresa': empresa,
+        'Gerente': gerente,
+        'Equipo': equipo })
+
+        with open('datos.json','w') as file:
+            json.dump(data,file,indent=4)
+
         p = Proyecto(id,nombre,descripcion,fechaInicio,fechaVencimiento,estado,empresa,gerente,equipo)
         self.agregarProyecto(p)
     

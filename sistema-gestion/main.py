@@ -18,7 +18,6 @@ def redigir(opcion):
             proyecto.borrarProyecto()
         elif(subopcion == 4):
             proyecto.consultarProyecto()
-        
 
     elif(opcion == 2):
         print('\tTAREAS\t')
