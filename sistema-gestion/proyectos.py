@@ -97,8 +97,9 @@ class Proyectos:
             agregartareas = []
         #Vinculacion con Tareas y  Subtareas
 
-        data = {}
-        data['Proyectos'] = []
+        with open('datos.json', 'r') as file:
+            data = json.load(file)
+        
         data['Proyectos'].append({
         'ID': id,
         'Nombre': nombre,
@@ -109,7 +110,7 @@ class Proyectos:
         'Empresa': empresa,
         'Gerente': gerente,
         'Equipo': equipo ,
-        'tareas': ''})
+        'tareas': ''})        
 
         with open('datos.json','w') as file:
             json.dump(data,file,indent=4)

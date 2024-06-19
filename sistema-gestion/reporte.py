@@ -7,14 +7,14 @@ class reporte:
             with open('datos.json', 'r') as f:
                 data = json.load(f)
                 #ARREGLAR ESTO PONER todo DENTRO
-                self.proyectos = data['proyectos']
+                self.proyectos = data['Proyectos']
                 #self.proyectos = [Proyecto for p in data]
         else:
             self.proyectos = proyectos
 
     def tareas_por_estado(self,estado):
         for proyecto in self.proyectos:
-            for tarea in proyecto.tareas:
+            for tarea in proyecto['tareas']:
                 if tarea.estado == estado:
                     print(f"Nombre de la tarea: {tarea.nombre}")
                     print(f"Descripción de la tarea: {tarea.descripcion}")
@@ -42,20 +42,20 @@ class reporte:
         elif fecha_vencimiento:
             # Filtrar por fecha de vencimiento
             for proyecto in self.proyectos:
-                for tarea in proyecto.tareas:
-                    if tarea.fecha_vencimiento == fecha_vencimiento:
+                for tarea in proyecto['tareas']:
+                    if tarea['fecha_vencimiento'] == fecha_vencimiento:
                         print(f"Nombre de la tarea: {tarea.nombre}")
                         print(f"Descripción de la tarea: {tarea.descripcion}")
                         print(f"Fecha de inicio de la tarea: {tarea.fecha_inicio}")
                         print(f"Fecha de fin de la tarea: {tarea.fecha_fin}")
                         print("Subtareas:")
-                        for subtarea in tarea.subtareas:
+                        for subtarea in tarea['subtareas']:
                             print(f"\t{subtarea.nombre}")
                         print()
         else:
             print("No se ha especificado un rango de fechas o una fecha de vencimiento")
 
-    def proyectos(self,filtro):
+    def proyectos_filtro(self,filtro):
 
         #Arreglar los nombres de los atributos de ls proyectos
         for i in range(0,len(self.proyectos)-1):

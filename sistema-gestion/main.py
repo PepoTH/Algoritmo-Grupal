@@ -41,6 +41,7 @@ def redigir(opcion):
 
     elif(opcion == 3):
         print('\tSUBTAREAS\t')
+        print('Back')
     elif(opcion == 4):
         print('\tCONSULTAS - REPORTES\t')
         print('1- Consulta de Tareas por Estado')
@@ -64,10 +65,31 @@ def redigir(opcion):
                 mod_repo.filtrar_por_fecha(None,None,fechaven)
                 
         elif(subopcion == 3):
-            proyecto.borrarProyectoJSON()
+            print('\tFILTROS\t')
+            print('Que desea filtrar: ')
+            print('1- Nombre')
+            print('2- ID')
+            megaopcion = int(input('Opcion: '))
+            if(megaopcion == 1):
+                name = input('Ingrese el nombre del proyecto: ')
+                mod_repo.proyectos_filtro(name)
+            else:
+                ides = input('Ingrese el id del proyecto: ')
+                mod_repo.proyectos_filtro(ides)   
             pass
         elif(subopcion == 4):
-            proyecto.consultarProyectoJSON()
+            print('\tFILTROS\t')
+            print('Que desea filtrar: ')
+            print('1- Nombre')
+            print('2- ID')
+            megaopcion = int(input('Opcion: '))
+            if(megaopcion == 1):
+                name = input('Ingrese el nombre del proyecto: ')
+                mod_repo.subtareas(name)
+            else:
+                ides = input('Ingrese el id del proyecto: ')
+                mod_repo.subtareas(ides)
+            pass
             pass
 
 opcion = 999    
