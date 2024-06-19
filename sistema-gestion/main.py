@@ -34,7 +34,7 @@ def redigir(opcion):
         proyecto = reporte()
         if(subopcion == 1):
             estado = input('Ingrese el estado: ')
-            reporte.tareas(estado)
+            reporte.tareas_por_estado(estado)
         elif(subopcion == 2):
             filtrar = input('Desea filtrar por rango de fecha(1) o por fecha de vencimiento(2)')
 

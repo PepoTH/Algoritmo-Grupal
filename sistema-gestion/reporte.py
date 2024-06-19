@@ -7,25 +7,23 @@ class reporte:
             with open('datos.json', 'r') as f:
                 data = json.load(f)
                 #ARREGLAR ESTO PONER todo DENTRO
-                self.proyectos = data['Proyectos']
+                self.proyectos = data['proyectos']
                 #self.proyectos = [Proyecto for p in data]
         else:
             self.proyectos = proyectos
 
-    def tareas(self,estado):
-        #Arreglar los nombres de los atributos de ls proyectos
-        def tareas_por_estado(self, estado):
-            for proyecto in self.proyectos:
-                for tarea in proyecto.tareas:
-                    if tarea.estado == estado:
-                        print(f"Nombre de la tarea: {tarea.nombre}")
-                        print(f"Descripción de la tarea: {tarea.descripcion}")
-                        print(f"Fecha de inicio de la tarea: {tarea.fecha_inicio}")
-                        print(f"Fecha de fin de la tarea: {tarea.fecha_fin}")
-                        print("Subtareas:")
-                        for subtarea in tarea.subtareas:
-                            print(f"\t{subtarea.nombre}")
-                        print()
+    def tareas_por_estado(self,estado):
+        for proyecto in self.proyectos:
+            for tarea in proyecto.tareas:
+                if tarea.estado == estado:
+                    print(f"Nombre de la tarea: {tarea.nombre}")
+                    print(f"Descripción de la tarea: {tarea.descripcion}")
+                    print(f"Fecha de inicio de la tarea: {tarea.fecha_inicio}")
+                    print(f"Fecha de fin de la tarea: {tarea.fecha_fin}")
+                    print("Subtareas:")
+                    for subtarea in tarea.subtareas:
+                        print(f"\t{subtarea.nombre}")
+                    print()
 
     def filtrar_por_fecha(self, fecha_inicio=None, fecha_fin=None, fecha_vencimiento=None):
         if fecha_inicio and fecha_fin:
