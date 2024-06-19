@@ -19,19 +19,8 @@ class Proyecto:
     def crearTarea(self,id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc):
         self.Tareas.append(NodoTarea(id,nombre,empresa,cliente,descripcion,fechaI,fechaV,estadoAc,porc))
 
-    def modificar(self):
-        self.id = input("Ingrese el nuevo ID del proyecto: ")
-        self.nombre = input("Ingrese el nuevo nombre del proyecto: ")
-        self.descripcion = input("Ingrese la nueva descripción del proyecto: ")
-        self.fechaInicio = input("Ingrese la nueva fecha de inicio: ")
-        self.fechaVencimiento = input("Ingrese la nueva fecha de vencimiento: ")
-        self.estado = input("Ingrese el nuevo estado del proyecto: ")
-        self.equipo = input("Ingrese la nueva empresa del proyecto: ")
-        self.gerente = input("Ingrese el nuevo gerente del proyecto: ")
-        self.equipo = input("Ingrese el nuevo equipo del proyecto: ")
-
-        data = {}
-        data['Proyectos'] = []
+    def modificar(self,nombre):
+        pass
 
     def mostrar(self):
         print("Id: {}\nNombre: {}\nDescripcion: {}\nFecha de inicio: {}\nFecha de vencimiento: {}\nEstado: {}\nEquipo: {}\nGerente: {}\nEquipo: {}".format(self.id,self.nombre,self.descripcion,self.fechaInicio,self.fechaVencimiento,self.estado,self.empresa,self.gerente,self.equipo))
@@ -87,20 +76,49 @@ class Proyectos:
         with open('datos.json','w') as file:
             json.dump(data,file,indent=4)
 
-        
-        print(data['Proyectos'])
-
         p = Proyecto(id,nombre,descripcion,fechaInicio,fechaVencimiento,estado,empresa,gerente,equipo)
         self.agregarProyecto(p)
     
     def modificarProyecto(self): #Función que modifica un proyecto
-        nombre = input("Ingrese el nombre del proyecto a modificar: ")
-        nodo = self.buscarProyecto(nombre)
-        if nodo:
-            nodo.proyecto.modificar()
-            return True
-        else:
-            return False
+        nombre_viejo = str(input('Ingrese el nombre del proyecto a cambiar: '))
+
+        with open('datos.json','r') as archivo:
+            data = json.load(archivo)
+
+        ids = []
+        for elemento in data['Proyectos']:
+            if(elemento['Nombre'])
+
+        if not nombre_viejo in [data['Proyectos']]:
+            return print('Proyecto no Encontrado')
+        
+        #nodo = self.buscarProyecto(nombre)
+        id = input("Ingrese el nuevo ID del proyecto: ")
+        nombre = input("Ingrese el nuevo nombre del proyecto: ")
+        descripcion = input("Ingrese la nueva descripción del proyecto: ")
+        fechaInicio = input("Ingrese la nueva fecha de inicio: ")
+        fechaVencimiento = input("Ingrese la nueva fecha de vencimiento: ")
+        estado = input("Ingrese el nuevo estado del proyecto: ")
+        empresa = input("Ingrese la nueva empresa del proyecto: ")
+        gerente = input("Ingrese el nuevo gerente del proyecto: ")
+        equipo = input("Ingrese el nuevo equipo del proyecto: ")
+
+
+
+        for elemento in data['Proyectos']:
+            if(elemento['Nombre'] == nombre_viejo):
+                elemento.update({'ID': id})
+                elemento.update({'Nombre': nombre})
+                elemento.update({'Descripcion': descripcion})
+                elemento.update({'Fecha de Inicio': fechaInicio})
+                elemento.update({'Fecha de Vencimiento': fechaVencimiento})
+                elemento.update({'Estado': estado})
+                elemento.update({'Empresa': empresa})
+                elemento.update({'Gerente': gerente})
+                elemento.update({'Equipo': equipo})
+
+        with open('datos.json','w') as file:
+            json.dump(data,file,indent=4)
     
     def listarProyectos(self): #Función que lista todos los proyectos
         lista = []
