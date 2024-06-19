@@ -27,14 +27,13 @@ class NodoTarea:
 
     def eliminar_Subtareas(self):
         self.subtareas.clear()
-    
-
-        
+     
 
 #Clase para hacer todo los metodos de las listas entrelazadas
 class LTareas:
     def __init__(self):
         self.cabeza = None
+        self.tareas = None
 
     #Funcion que agrega una tarea
     def agregar_tarea(self,tarea):
@@ -292,10 +291,14 @@ class CTareas:
                       aux.descrip,aux.fechaI,aux.fechaV,
                       aux.estado,aux.porce,aux.subtareas)
             aux = aux.siguiente
+
+def crearTarea(id,nombre,empresa,cliente,descripcion,fechainit,fechavec,estado,por):
+    return NodoTarea(id,nombre,empresa,cliente,descripcion,fechainit,fechavec,estado,por)
 #Funcion que elige que metodo quiere utilizar para organizar las tareas
 def organizacionTareas():
-    tarea1 = NodoTarea(1,"Tarea1","Empresa1","Cliente1","Descripcion1",datetime(2016,12,2).strftime("%y %m %d")
-    ,datetime(2025,7,12).strftime("%y %m %d"),"En progreso",65)
+    #tarea1 = NodoTarea(1,"Tarea1","Empresa1","Cliente1","Descripcion1",datetime(2016,12,2).strftime("%y %m %d")
+    #,datetime(2025,7,12).strftime("%y %m %d"),"En progreso",65)
+    tarea1 = crearTarea()
     print("Desea agregar una subtarea a la tarea1? (S/N)")
     agreSub = input(" : ")
     if (agreSub.upper() == "S"):

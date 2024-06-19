@@ -82,7 +82,7 @@ class Proyectos:
         lista = []
         nodo = self.cabeza
         while nodo:
-            lista.append(nodo.proyecto.nombre)
+            lista.append(nodo.proyecto)
             nodo = nodo.siguiente
         return lista
 
