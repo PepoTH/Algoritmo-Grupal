@@ -9,9 +9,15 @@ def redigir(opcion):
         print('3- Borrar Proyecto')
         print('4- Consultar Proyecto')
         subopcion = int(input('Ingrese la opcion deseada: '))
+        proyecto = Proyectos()
         if(subopcion == 1):
-            proyecto = Proyectos()
-            proyecto.agregarProyecto()
+            proyecto.crearProyecto()
+        elif(subopcion == 2):
+            proyecto.modificarProyecto()
+        elif(subopcion == 3):
+            proyecto.borrarProyecto()
+        elif(subopcion == 4):
+            proyecto.consultarProyecto()
         
 
     elif(opcion == 2):
