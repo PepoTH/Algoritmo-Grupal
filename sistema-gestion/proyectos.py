@@ -85,11 +85,11 @@ class Proyectos:
         with open('datos.json','r') as archivo:
             data = json.load(archivo)
 
-        ids = []
+        names = []
         for elemento in data['Proyectos']:
-            if(elemento['Nombre'])
+            names.append(elemento['Nombre'])
 
-        if not nombre_viejo in [data['Proyectos']]:
+        if not nombre_viejo in names:
             return print('Proyecto no Encontrado')
         
         #nodo = self.buscarProyecto(nombre)
