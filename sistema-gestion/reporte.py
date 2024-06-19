@@ -29,7 +29,7 @@ class reporte:
         if fecha_inicio and fecha_fin:
             # Filtrar por rango de fechas
             for proyecto in self.proyectos:
-                for tarea in proyecto.tareas:
+                for tarea in proyecto['tareas']:
                     if fecha_inicio <= tarea.fecha_inicio <= fecha_fin:
                         print(f"Nombre de la tarea: {tarea.nombre}")
                         print(f"Descripción de la tarea: {tarea.descripcion}")
