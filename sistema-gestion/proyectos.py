@@ -83,10 +83,13 @@ class Proyectos:
         gerente = input("Ingrese el gerente que gestiona el proyecto: ")
         equipo = input("Ingrese el equipo encargado del proyecto: ")
 
-        tareas = input("Desea agregar tareas?(s/n): ")
-
-        if(tareas=='s'):
-            #tareas = 
+        tareas1 = input("Desea agregar tareas?(s/n): ")
+        if(tareas1=='s'):
+            cantidad = int(input('Cuantas Tareas?: '))
+            for i in range(0,len(cantidad) - 1):
+                agregartareas = []
+                agregartareas.append(tareas)
+                
             pass
         else:
             tareas = []

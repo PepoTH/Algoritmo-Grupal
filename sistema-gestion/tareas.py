@@ -292,8 +292,23 @@ class CTareas:
                       aux.estado,aux.porce,aux.subtareas)
             aux = aux.siguiente
 
-def crearTarea(id,nombre,empresa,cliente,descripcion,fechainit,fechavec,estado,por):
-    return NodoTarea(id,nombre,empresa,cliente,descripcion,fechainit,fechavec,estado,por)
+def crearTarea():
+    nuevo_id = int(input("Ingrese el id"))
+    nuevo_nom = input("Ingrese el nombre: ")
+    nuevo_empresa = input("Ingrese la empresa: ")
+    nuevo_cliente = input("Ingrese el cliente: ")
+    nueva_descri = input("Ingrese la descripcion: ")
+    yI = int(input("Ingrese el  año de inicio: "))
+    mI = int(input("Ingrese el  mes de inicio:  "))
+    dI = int(input("Ingrese el dia de inicio: "))
+    nueva_FechaI = datetime(yI,mI,dI).strftime("%y %m %d")
+    yV = int(input("Ingrese el  año de vencimiento: "))
+    mV = int(input("Ingrese el  mes de vencimiento:  "))
+    dV = int(input("Ingrese el dia de vencimiento: "))
+    nueva_FechaV = datetime(yV,mV,dV).strftime("%y %m %d")
+    nuevo_estado = input("Ingrese el  estado de la tarea: ")
+    nuevo_porc = int(input("Ingrese el  porcentaje de la tarea %: "))
+    return NodoTarea(nuevo_id,nuevo_nom,nuevo_empresa,nuevo_cliente,nueva_descri,nueva_FechaI,nueva_FechaV,nuevo_estado,nuevo_porc)
 #Funcion que elige que metodo quiere utilizar para organizar las tareas
 def organizacionTareas():
     #tarea1 = NodoTarea(1,"Tarea1","Empresa1","Cliente1","Descripcion1",datetime(2016,12,2).strftime("%y %m %d")
