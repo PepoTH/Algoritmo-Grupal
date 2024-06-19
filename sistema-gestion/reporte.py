@@ -4,7 +4,7 @@ from proyectos import *
 class reporte:
     def __init__(self, proyectos=None):
         if proyectos is None:
-            with open('proyectos.json', 'r') as f:
+            with open('datos.json', 'r') as f:
                 data = json.load(f)
                 self.proyectos = [Proyecto.from_dict(p) for p in data]
         else:
@@ -24,6 +24,36 @@ class reporte:
                         for subtarea in tarea.subtareas:
                             print(f"\t{subtarea.nombre}")
                         print()
+
+    def filtrar_por_fecha(self, fecha_inicio=None, fecha_fin=None, fecha_vencimiento=None):
+        if fecha_inicio and fecha_fin:
+            # Filtrar por rango de fechas
+            for proyecto in self.proyectos:
+                for tarea in proyecto.tareas:
+                    if fecha_inicio <= tarea.fecha_inicio <= fecha_fin:
+                        print(f"Nombre de la tarea: {tarea.nombre}")
+                        print(f"Descripción de la tarea: {tarea.descripcion}")
+                        print(f"Fecha de inicio de la tarea: {tarea.fecha_inicio}")
+                        print(f"Fecha de fin de la tarea: {tarea.fecha_fin}")
+                        print("Subtareas:")
+                        for subtarea in tarea.subtareas:
+                            print(f"\t{subtarea.nombre}")
+                        print()
+        elif fecha_vencimiento:
+            # Filtrar por fecha de vencimiento
+            for proyecto in self.proyectos:
+                for tarea in proyecto.tareas:
+                    if tarea.fecha_vencimiento == fecha_vencimiento:
+                        print(f"Nombre de la tarea: {tarea.nombre}")
+                        print(f"Descripción de la tarea: {tarea.descripcion}")
+                        print(f"Fecha de inicio de la tarea: {tarea.fecha_inicio}")
+                        print(f"Fecha de fin de la tarea: {tarea.fecha_fin}")
+                        print("Subtareas:")
+                        for subtarea in tarea.subtareas:
+                            print(f"\t{subtarea.nombre}")
+                        print()
+        else:
+            print("No se ha especificado un rango de fechas o una fecha de vencimiento")
 
     def proyectos(self,filtro):
 

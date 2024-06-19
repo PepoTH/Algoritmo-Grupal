@@ -1,0 +1,2 @@
+/Users/cesar/Desktop/Programacion/Algoritmo-Grupal/datos.json
+/Users/cesar/Desktop/Programacion/Algoritmo-Grupal/subtareas.json

@@ -36,7 +36,16 @@ def redigir(opcion):
             estado = input('Ingrese el estado: ')
             reporte.tareas(estado)
         elif(subopcion == 2):
-            proyecto.modificarProyecto()
+            filtrar = input('Desea filtrar por rango de fecha(1) o por fecha de vencimiento(2)')
+
+            if(filtrar==1):
+                fechainit = input('Ingrese la fecha Inicial(XX-XX-XXXX): ')
+                fechafin = input('Ingrese la fecha tope(XX-XX-XXXX): ')
+                reporte.filtrar_por_fecha(fechainit,fechafin)
+            else:
+                fechaven = input('Ingrese la fecha de vencimiento(XX-XX-XXXX): ')
+                reporte.filtrar_por_fecha(None,None,fechaven)
+                
         elif(subopcion == 3):
             proyecto.borrarProyectoJSON()
         elif(subopcion == 4):
