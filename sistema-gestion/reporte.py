@@ -12,22 +12,18 @@ class reporte:
 
     def tareas(self,estado):
         #Arreglar los nombres de los atributos de ls proyectos
-        for i in range(0,len(self.proyectos)-1):
-            #Recorrido de Proyectos
-            for j in range(0,len(self.proyectos[i].Tareas) - 1):
-                #Recorrido de Tareas
-                tarea = self.proyectos[i].Tareas[j]
-                if(tarea.estado == estado):
-                    #Verificacion del estado de la tarea
-                    print('Nombre de la tarea: ' + tarea.nombre)
-                    print('Descripcion de la tarea: ' + tarea.descripcion)
-                    print('Fecha de Inicio de la tarea: ' + tarea.fechainit)
-                    print('Fecha de Fin de la tarea: ' + tarea.fechafin)
-                    print('Subtareas: ')
-                    for k in range(0,len(tarea.subtareas)-1):
-                        #Recorrido de Subtareas
-                        print('\t'+ tarea.subtareas[k].nombre)
-                print('\n')
+        def tareas_por_estado(self, estado):
+            for proyecto in self.proyectos:
+                for tarea in proyecto.tareas:
+                    if tarea.estado == estado:
+                        print(f"Nombre de la tarea: {tarea.nombre}")
+                        print(f"Descripción de la tarea: {tarea.descripcion}")
+                        print(f"Fecha de inicio de la tarea: {tarea.fecha_inicio}")
+                        print(f"Fecha de fin de la tarea: {tarea.fecha_fin}")
+                        print("Subtareas:")
+                        for subtarea in tarea.subtareas:
+                            print(f"\t{subtarea.nombre}")
+                        print()
 
     def proyectos(self,filtro):
 

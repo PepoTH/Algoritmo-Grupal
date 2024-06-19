@@ -1,4 +1,5 @@
 from proyectos import *
+from reporte import *
 
 def redigir(opcion):
 
@@ -28,11 +29,12 @@ def redigir(opcion):
         print('1- Consulta de Tareas por Estado')
         print('2- Filtrado por Fecha')
         print('3- Filtrado de proyectos')
-        print('4- Listarsubtareas')
+        print('4- Listar subtareas')
         subopcion = int(input('Ingrese la opcion deseada: '))
-        proyecto = Proyectos()
+        proyecto = reporte()
         if(subopcion == 1):
-            proyecto.crearProyecto()
+            estado = input('Ingrese el estado: ')
+            reporte.tareas(estado)
         elif(subopcion == 2):
             proyecto.modificarProyecto()
         elif(subopcion == 3):
