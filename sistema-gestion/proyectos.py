@@ -84,15 +84,17 @@ class Proyectos:
         equipo = input("Ingrese el equipo encargado del proyecto: ")
 
         tareas1 = input("Desea agregar tareas?(s/n): ")
+        agregartareas = []
+
         if(tareas1=='s'):
             cantidad = int(input('Cuantas Tareas?: '))
-            for i in range(0,len(cantidad) - 1):
-                agregartareas = []
-                agregartareas.append(tareas)
+            
+            for i in range(0,cantidad):
+                agregartareas.append(crearTarea())
                 
             pass
         else:
-            tareas = []
+            agregartareas = []
         #Vinculacion con Tareas y  Subtareas
 
         data = {}
@@ -106,7 +108,8 @@ class Proyectos:
         'Estado': estado,
         'Empresa': empresa,
         'Gerente': gerente,
-        'Equipo': equipo })
+        'Equipo': equipo ,
+        'tareas': ''})
 
         with open('datos.json','w') as file:
             json.dump(data,file,indent=4)

@@ -22,6 +22,23 @@ def redigir(opcion):
 
     elif(opcion == 2):
         print('\tTAREAS\t')
+        print('1- Agregar Tareas')
+        print('2- Insertar Tareas')
+        print('3- Eliminar Tareas')
+        print('4- Buscar Tareas')
+        print('5- Actualizar Informacion')
+        subopcion = int(input('Ingrese la opcion deseada: '))
+        if(subopcion==1):
+            pass
+        elif(subopcion==2):
+            pass
+        elif(subopcion==3):
+            pass
+        elif(subopcion==4):
+            pass
+        elif(subopcion==5):
+            pass
+
     elif(opcion == 3):
         print('\tSUBTAREAS\t')
     elif(opcion == 4):

@@ -293,7 +293,7 @@ class CTareas:
             aux = aux.siguiente
 
 def crearTarea():
-    nuevo_id = int(input("Ingrese el id"))
+    nuevo_id = int(input("Ingrese el id: "))
     nuevo_nom = input("Ingrese el nombre: ")
     nuevo_empresa = input("Ingrese la empresa: ")
     nuevo_cliente = input("Ingrese el cliente: ")
