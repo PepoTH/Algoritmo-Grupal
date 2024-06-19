@@ -91,7 +91,6 @@ class Proyectos:
             
             for i in range(0,cantidad):
                 agregartareas.append(crearTarea())
-                
             pass
         else:
             agregartareas = []
@@ -99,7 +98,9 @@ class Proyectos:
 
         with open('datos.json', 'r') as file:
             data = json.load(file)
-        
+
+        print(agregartareas)
+
         data['Proyectos'].append({
         'ID': id,
         'Nombre': nombre,
@@ -110,7 +111,22 @@ class Proyectos:
         'Empresa': empresa,
         'Gerente': gerente,
         'Equipo': equipo ,
-        'tareas': ''})        
+        'tareas': [{
+
+        }]
+        })  
+
+        index = 0
+        for i in range(0,len(data['Proyectos']) - 1):
+            if(data['Proyectos'][i]['Nombre'] == nombre):
+                index = i
+                break
+
+        print(data['Proyectos'][index]['tareas'])
+
+        for j in range(0,len(agregartareas)):
+            data['Proyectos'][index]['tareas'].append(agregartareas[j])
+              
 
         with open('datos.json','w') as file:
             json.dump(data,file,indent=4)
