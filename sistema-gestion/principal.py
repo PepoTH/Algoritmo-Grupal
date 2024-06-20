@@ -93,7 +93,7 @@ class Nodo:
     def __init__(self, valor=None):
         self.valor = valor
         self.siguiente = None
-        
+#Clase que representa todas las funciones que haremos con listas enlazada
 class ListaEnlazada:
     def __init__(self):
         self.cabeza = None
@@ -183,3 +183,47 @@ class ListaEnlazada:
         actual.siguiente = actual.siguiente.siguiente
         self.longitud -= 1
         return valor
+#Clase que representa todas las funciones que haremos con la pila
+class Pila:
+    def __init__(self):
+        self.tope = None
+    
+    def esta_vacia(self):
+        return self.tope is None
+    
+    def agregar(self, valor):
+        nodo_nuevo = Nodo(valor)
+        nodo_nuevo.siguiente = self.tope
+        self.tope = nodo_nuevo
+
+    def __iter__(self):
+        actual = self.tope
+        while actual:
+            yield actual.valor
+            actual = actual.siguiente
+
+    def eliminar(self):
+        if self.esta_vacia():
+            return None
+        else:
+            valor_eliminado = self.tope.valor
+            self.tope = self.tope.siguiente
+            return valor_eliminado
+
+    def ver_tope(self):
+        if self.esta_vacia():
+            return None
+        else:
+            return self.tope.valor
+
+    def recorrer(self):
+        if self.esta_vacia():
+            print("La pila está vacía")
+        else:
+            self._recorrer_aux(self.tope)
+
+    def _recorrer_aux(self, nodo):
+        if nodo is not None:
+            print(nodo.valor.nombre)
+            self._recorrer_aux(nodo.siguiente)
+
