@@ -226,7 +226,7 @@ class Pila:
         if nodo is not None:
             print(nodo.valor.nombre)
             self._recorrer_aux(nodo.siguiente)
-
+#Clase qe realiza todas las funciones que aremos con la cola
 class Cola:
     
     def __init__(self):
@@ -276,9 +276,10 @@ class Cola:
             print(nodo.valor)
             self._recorrer_aux(nodo.siguiente)
 
+#Clase que modifica el json
 class modificar:
     def __init__(self):    
-        ruta_archivo = os.path.join(os.getcwd(), "Proyectos_Algoritmos_2/datos.json")
+        ruta_archivo = os.path.join(os.getcwd(), "Algoritmo-Grupal/datos.json")
         #ruta_archivo_subtarea = os.path.join(os.getcwd(), "Proyectos_Algoritmos_2/datos_subtareas.json")
         self.proyectox = cargar_datos_desde_json(ruta_archivo)
         #self.proyectox_subtarea = cargar_datos_desde_json(ruta_archivo_subtarea)
