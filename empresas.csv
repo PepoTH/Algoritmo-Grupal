@@ -1,3 +1,4 @@
 id,nombre,descripcion,fecha_creacion,direccion,telefono,correo,gerente,equipo_contacto
 1,Empresa 1,Descripcion 1,2022-01-01,Direccion 1,123456789,empresa1@example.com,Gerente 1,Equipo 1
 2,Empresa 2,Descripcion 2,2022-01-02,Direccion 2,987654321,empresa2@example.com,Gerente 2,Equipo 2
+3,Hola,Emp2,2004-11-04,Caracas,04144019911,cesardarizaleta@gmail.com,Cesar,Cantv
