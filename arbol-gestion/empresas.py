@@ -1,61 +1,79 @@
 import csv
 from datetime import datetime
+import proyectos as pro
 
-class EmpresaCliente:
-    def __init__(self, id, nombre, descripcion, fecha_creacion, direccion, telefono, correo, gerente, equipo_contacto):
+class Empresa:
+    def __init__(self,id,nombre,descripcion,fechaC,
+                 direccion,telefono,correo,gerente,equipo_Contacto,proyecto = []):
         self.id = id
         self.nombre = nombre
         self.descripcion = descripcion
-        self.fecha_creacion = fecha_creacion
+        self.fechaCreacion = fechaC
         self.direccion = direccion
         self.telefono = telefono
         self.correo = correo
         self.gerente = gerente
-        self.equipo_contacto = equipo_contacto
-        self.proyectos = []
-
-class Proyecto:
-    def __init__(self, id, nombre, descripcion, fecha_inicio, fecha_fin):
-        self.id = id
-        self.nombre = nombre
-        self.descripcion = descripcion
-        self.fecha_inicio = fecha_inicio
-        self.fecha_fin = fecha_fin
-
-class GestorEmpresas:
-    def __init__(self, archivo_csv):
+        self.equipoC = equipo_Contacto
+        self.proyectos = proyecto
+    
+class GestorEmpresa:
+    def __init__(self,archivo):
         self.empresas = []
-        self.cargar_datos(archivo_csv)
-
-    def cargar_datos(self, archivo_csv):
-        with open(archivo_csv, 'r') as file:
+        self.cargar_datos(archivo)
+    #Funcion que carga los datos en un archivo csv
+    def cargar_datos(self,archivo):
+        with open(archivo, 'r') as file:
             reader = csv.reader(file)
-            next(reader)  # Saltar la fila de encabezados
-            for row in reader:
-                id, nombre, descripcion, fecha_creacion, direccion, telefono, correo, gerente, equipo_contacto = row
-                fecha_creacion = datetime.strptime(fecha_creacion, '%Y-%m-%d')
-                empresa = EmpresaCliente(id, nombre, descripcion, fecha_creacion, direccion, telefono, correo, gerente, equipo_contacto)
+            for arc in reader:
+                id,nombre,descripcion,fechaC,direccion,telefono,correo,gerente,equipo_contacto,proyecto = arc
+                empresa = Empresa(id,nombre,descripcion,fechaC,direccion,telefono,
+                                  correo,gerente,equipo_contacto,proyecto)
                 self.empresas.append(empresa)
-
-    def crear_empresa(self, nombre, descripcion, fecha_creacion, direccion, telefono, correo, gerente, equipo_contacto):
-        id = len(self.empresas) + 1
-        empresa = EmpresaCliente(id, nombre, descripcion, fecha_creacion, direccion, telefono, correo, gerente, equipo_contacto)
-        self.empresas.append(empresa)
-        self.guardar_datos()
-
-    def listar_empresas(self):
+    
+    #Funcion que crea una empresa de un cliente
+    def crear_empresa(self, nombre, descripcion, fechaC, direccion, telefono, correo, gerente, equipo_contacto,proyecto):
+        if len(self.empresas) >= 0:
+            id = len(self.empresas) + 1
+            lista = pro.GestorProyecto().crear_proyecto(proyecto)
+            empresa = Empresa(id,nombre,descripcion,fechaC,direccion,telefono,
+                                      correo,gerente,equipo_contacto,lista)
+            self.empresas.append(empresa)
+            self.guardar_datos()
+            return
+        else:
+            print("No se han podido crear la empresa")
+    
+    #Funcion que consulta la empresa del cliente segun su id
+    def consultar_empresa(self,id):
         for empresa in self.empresas:
-            print(f"ID: {empresa.id}, Nombre: {empresa.nombre}, Descripcion: {empresa.descripcion}")
-
-    def modificar_empresa(self, id, nombre=None, descripcion=None, fecha_creacion=None, direccion=None, telefono=None, correo=None, gerente=None, equipo_contacto=None):
+            if empresa.id == id:
+                print(f"ID de la empresa: {empresa.id}, Nombre de la empresa: {empresa.nombre}, Descripcion de la empresa: {empresa.descripcion}")
+    
+    #Funcion que lista la empresa del cliente
+    def listar_empresa(self):
+        for empresa in self.empresas:
+            print(f"ID de la empresa: {empresa.id}, Nombre de la empresa: {empresa.nombre}, Descripcion de la empresa: {empresa.descripcion}")
+    
+    #Funcion que elimina una empresa segun su Id
+    def eliminar_empresa(self,id):
+        for empresa in self.empresas:
+            if empresa.id == id:
+                self.empresas.remove(empresa)
+                self.guardar_datos()
+                return
+        print("No se han encontrado la empresa")
+    
+    #Funcion que modifica una empresa cliente segun su id
+    def modificar_empresa(self,id,nombre,descripcion,fechaC,
+                 direccion,telefono,correo,gerente,equipo_Contacto):
         for empresa in self.empresas:
             if empresa.id == id:
                 if nombre:
                     empresa.nombre = nombre
                 if descripcion:
                     empresa.descripcion = descripcion
-                if fecha_creacion:
-                    empresa.fecha_creacion = fecha_creacion
+                if fechaC:
+                    empresa.fechaCreacion = fechaC
                 if direccion:
                     empresa.direccion = direccion
                 if telefono:
@@ -64,120 +82,44 @@ class GestorEmpresas:
                     empresa.correo = correo
                 if gerente:
                     empresa.gerente = gerente
-                if equipo_contacto:
-                    empresa.equipo_contacto = equipo_contacto
+                if equipo_Contacto:
+                    empresa.equipoC = equipo_Contacto
                 self.guardar_datos()
                 return
-        print("Empresa no encontrada")
-
-    def consultar_empresa(self, id):
-        for empresa in self.empresas:
-            if empresa.id == id:
-                print(f"ID: {empresa.id}, Nombre: {empresa.nombre}, Descripcion: {empresa.descripcion}")
-                return
-        print("Empresa no encontrada")
-
-    def eliminar_empresa(self, id):
-        for empresa in self.empresas:
-            if empresa.id == id:
-                self.empresas.remove(empresa)
-                self.guardar_datos()
-                return
-        print("Empresa no encontrada")
-
+        print("No se encontro la empresa")
+    
+    #Funcion que guarda la informacion de las empresas en el archivo.csv
     def guardar_datos(self):
-        with open('empresas.csv', 'w', newline='') as file:
+        with open('Datos.csv','w',newline='') as file:
             writer = csv.writer(file)
-            writer.writerow(["id", "nombre", "descripcion", "fecha_creacion", "direccion", "telefono", "correo", "gerente", "equipo_contacto"])
+            writer.writerow(["Id", "Nombre", "Descripción", "Fecha de creación", "Dirección", "Telefono", "correo", "gerente", "equipo_contacto", "Proyectos"])
             for empresa in self.empresas:
-                writer.writerow([empresa.id, empresa.nombre, empresa.descripcion, empresa.fecha_creacion.strftime('%Y-%m-%d'), empresa.direccion, empresa.telefono, empresa.correo, empresa.gerente, empresa.equipo_contacto])
+                writer.writerow([empresa.id, empresa.nombre, empresa.descripcion, empresa.fechaCreacion, 
+                                 empresa.direccion, empresa.telefono, empresa.correo, empresa.gerente, empresa.equipoC, 
+                                 empresa.proyectos])
 
-    def gestionar_proyectos(self, id_empresa):
-        for empresa in self.empresas:
-            if empresa.id == id_empresa:
-                while True:
-                    print("1. Crear proyecto")
-                    print("2. Listar proyectos")
-                    print("3. Modificar proyecto")
-                    print("4. Eliminar proyecto")
-                    print("5. Volver")
-                    opcion = input("Seleccione una opción: ")
-                    if opcion == "1":
-                        nombre = input("Ingrese el nombre del proyecto: ")
-                        descripcion = input("Ingrese la descripción del proyecto: ")
-                        fecha_inicio = input("Ingrese la fecha de inicio del proyecto (YYYY-MM-DD): ")
-                        fecha_fin = input("Ingrese la fecha de fin del proyecto (YYYY-MM-DD): ")
-                        proyecto = Proyecto(len(empresa.proyectos) + 1, nombre, descripcion, datetime.strptime(fecha_inicio, '%Y-%m-%d'), datetime.strptime(fecha_fin, '%Y-%m-%d'))
-                        empresa.proyectos.append(proyecto)
-                    elif opcion == "2":
-                        for proyecto in empresa.proyectos:
-                            print(f"ID: {proyecto.id}, Nombre: {proyecto.nombre}, Descripcion: {proyecto.descripcion}")
-                    elif opcion == "3":
-                        id_proyecto = int(input("Ingrese el ID del proyecto a modificar: "))
-                        for proyecto in empresa.proyectos:
-                            if proyecto.id == id_proyecto:
-                                nombre = input("Ingrese el nuevo nombre del proyecto: ")
-                                descripcion = input("Ingrese la nueva descripción del proyecto: ")
-                                fecha_inicio = input("Ingrese la nueva fecha de inicio del proyecto (YYYY-MM-DD): ")
-                                fecha_fin = input("Ingrese la nueva fecha de fin del proyecto (YYYY-MM-DD): ")
-                                proyecto.nombre = nombre
-                                proyecto.descripcion = descripcion
-                                proyecto.fecha_inicio = datetime.strptime(fecha_inicio, '%Y-%m-%d')
-                                proyecto.fecha_fin = datetime.strptime(fecha_fin, '%Y-%m-%d')
-                                break
-                    elif opcion == "4":
-                        id_proyecto = int(input("Ingrese el ID del proyecto a eliminar: "))
-                        for proyecto in empresa.proyectos:
-                            if proyecto.id == id_proyecto:
-                                empresa.proyectos.remove(proyecto)
-                                break
-                    elif opcion == "5":
-                        break
-                return
-        print("Empresa no encontrada")
 
-gestor = GestorEmpresas("empresas.csv")
+def menu_empresa():
+    
+    em = GestorEmpresa('Datos.csv')
 
-while True:
-    print("1. Crear empresa")
-    print("2. Listar empresas")
-    print("3. Modificar empresa")
-    print("4. Consultar empresa")
-    print("5. Eliminar empresa")
-    print("6. Gestionar proyectos")
-    print("7. Salir")
-    opcion = input("Seleccione una opción: ")
-    if opcion == "1":
-        nombre = input("Ingrese el nombre de la empresa: ")
-        descripcion = input("Ingrese la descripción de la empresa: ")
-        fecha_creacion = input("Ingrese la fecha de creación de la empresa (YYYY-MM-DD): ")
-        direccion = input("Ingrese la dirección de la empresa: ")
-        telefono = input("Ingrese el teléfono de la empresa: ")
-        correo = input("Ingrese el correo electrónico de la empresa: ")
-        gerente = input("Ingrese el nombre del gerente de la empresa: ")
-        equipo_contacto = input("Ingrese el nombre del equipo de contacto de la empresa: ")
-        gestor.crear_empresa(nombre, descripcion, datetime.strptime(fecha_creacion, '%Y-%m-%d'), direccion, telefono, correo, gerente, equipo_contacto)
-    elif opcion == "2":
-        gestor.listar_empresas()
-    elif opcion == "3":
-        id = int(input("Ingrese el ID de la empresa a modificar: "))
-        nombre = input("Ingrese el nuevo nombre de la empresa: ")
-        descripcion = input("Ingrese la nueva descripción de la empresa: ")
-        fecha_creacion = input("Ingrese la nueva fecha de creación de la empresa (YYYY-MM-DD): ")
-        direccion = input("Ingrese la nueva dirección de la empresa: ")
-        telefono = input("Ingrese el nuevo teléfono de la empresa: ")
-        correo = input("Ingrese el nuevo correo electrónico de la empresa: ")
-        gerente = input("Ingrese el nuevo nombre del gerente de la empresa: ")
-        equipo_contacto = input("Ingrese el nuevo nombre del equipo de contacto de la empresa: ")
-        gestor.modificar_empresa(id, nombre, descripcion, datetime.strptime(fecha_creacion, '%Y-%m-%d'), direccion, telefono, correo, gerente, equipo_contacto)
-    elif opcion == "4":
-        id = int(input("Ingrese el ID de la empresa a consultar: "))
-        gestor.consultar_empresa(id)
-    elif opcion == "5":
-        id = int(input("Ingrese el ID de la empresa a eliminar: "))
-        gestor.eliminar_empresa(id)
-    elif opcion == "6":
-        id = int(input("Ingrese el ID de la empresa para gestionar proyectos: "))
-        gestor.gestionar_proyectos(id)
-    elif opcion == "7":
-        break
+    while True:
+        print("1. Crear empresa")
+        print("2.Consultar empresa")
+        print("3.Listar empresa")
+        print("4.Eliminar Empresa")
+        opc = int(input("Ingrese una opción: "))
+
+        if(opc == 1):
+            nombre = input("Ingrese el nombre de la empresa: ")
+            descripcion = input("Ingrese uan descripcion a la empresa: ")
+            fecha = input("Ingrese la fecha de creación de la empresa en el formato (YYYY-MM-DD): ")
+            dire = input("Ingrese la direccion de la empresa: ")
+            tlf = input("Ingrese el numero de telefono de la empresa: ")
+            correo = input("Ingrese el correo de la empresa: ")
+            gerente = input("Ingrese el nombre del gerente de la empresa")
+            equipo = input("Ingrese el equpio encargado de la empresa")
+            lista = []
+            em.crear_empresa(nombre,descripcion,datetime.strptime(fecha,'%Y-%m-%d'),dire,tlf,correo,gerente,equipo,lista)
+
+menu = menu_empresa()
