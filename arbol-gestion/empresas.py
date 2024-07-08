@@ -136,7 +136,7 @@ class GestorEmpresas:
                 return
         print("Empresa no encontrada")
 
-gestor = GestorEmpresas('empresas.csv')
+gestor = GestorEmpresas("empresas.csv")
 
 while True:
     print("1. Crear empresa")
