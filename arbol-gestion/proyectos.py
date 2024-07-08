@@ -162,7 +162,7 @@ def gestionar_proyectos():
         print("2. Listar proyectos")
         print("3. Modificar proyecto")
         print("4. Eliminar proyecto")
-        print("5. Volver")
+        print("5. mostrar AVL")
         opcion = input("Seleccione una opción: ")
         if opcion == "1":
             nombre = input("Ingrese el nombre del proyecto: ")
@@ -176,6 +176,28 @@ def gestionar_proyectos():
             result = gestorP.crear_proyecto(nombre,descripcion,datetime.strptime(fechaInicio,"%Y %m %d"), datetime.strptime(fechaVenci,"%Y %m %d")
                                    ,estadoActual,empresa,gerente,equipo)
             print(result)
+        elif opcion == "2":
+            gestorP.Listar_proyecto()
+        elif opcion == "3":
+            id = int(input("Ingrese el id del proyecto que quiere modificar:"))
+            nombre = input("Ingrese el nombre del proyecto: ")
+            descripcion = input("Ingrese la descripcion del proyecto: ")
+            fechaInicio = input("Ingrese la fecha de inicio del proyecto (YYYY-MM-DD): ")
+            fechaVenci = input("Ingrese la fecha de fin del proyecto (YYYY-MM-DD): ")
+            estadoActual = input("Ingrese el estado Actual del proyecto: ")
+            empresa = input("Ingrese la empresa del proyecto: ")
+            gerente = input("Ingrese el nombre del gerente encargado proyecto: ")
+            equipo = input("Ingrese los equipos encargados del proyecto: ")
+            gestorP.modifica_proyecto(id,nombre,descripcion,datetime.strptime(fechaInicio,"%Y %m %d"), datetime.strptime(fechaVenci, "%Y %m %d")
+                                      ,estadoActual,empresa,gerente,equipo)
+        elif opcion == "4":
+            id = int(input("Ingrese el id del proyecto que quiere eliminar: "))
+            gestorP.eliminar_proyecto(id)
+        
+        elif opcion == "5":
+            avl.insertar_fecha(datetime.strptime(fechaVenci,"%Y %m %d"))
+            avl.insertar_fecha(datetime.strptime(fechaVenci,"%Y %m %d"))
+            avl.in_order(avl.raiz)
 
 menu = gestionar_proyectos()
             
