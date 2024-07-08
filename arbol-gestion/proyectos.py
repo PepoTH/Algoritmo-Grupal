@@ -1,4 +1,5 @@
 from datetime import datetime
+import empresas
 #Clase de los proyectos
 class Proyecto:
     def __init__(self,id,nombre,descripcion,fechaI,fechaV,estado,empresa,gerente,equipo):
@@ -14,10 +15,10 @@ class Proyecto:
     
 class GestorProyecto:
     def __init__(self):
-        self.proyectos = []
+        self.proyectos = empresas.EmpresaCliente().proyectos
     
     #Funcion que crear un nuevo proyecto
-    def crear_proyecto(self,id,nombre,descripcion,fechaI,fechaV,estado,empresa,gerente,equipo):
+    def crear_proyecto(self,nombre,descripcion,fechaI,fechaV,estado,empresa,gerente,equipo):
         id = len(self.proyectos) + 1
         proyecto = Proyecto(id,nombre,descripcion,fechaI,fechaV,estado,empresa,gerente,equipo)
         self.proyectos.append(proyecto)
@@ -151,24 +152,34 @@ class AVL:
             print(nodo.fechaV)
             self.in_order(nodo.derecha)
 
+#Menu para la gestion de proyectos
+def gestionar_proyectos():
+    gestorP = GestorProyecto()
+    avl = AVL()
 
-proyecto1 = Proyecto(1, "Proyecto 1", "Descripción del proyecto 1", "01/01/2022", "31/12/2022", "En curso", "Empresa 1", "Gerente 1", "Equipo 1")
-proyecto2 = Proyecto(2, "Proyecto 2", "Descripción del proyecto 2", "01/02/2022", "28/02/2022", "Finalizado", "Empresa 2", "Gerente 2", "Equipo 2")
-proyecto3 = Proyecto(3, "Proyecto 3", "Descripción del proyecto 3", "01/03/2022", "31/03/2022", "En curso", "Empresa 3", "Gerente 3", "Equipo 3")
-proyecto4 = Proyecto(4, "Proyecto 4", "Descripción del proyecto 4", "01/04/2022", "30/04/2022", "Pendiente", "Empresa 4", "Gerente 4", "Equipo 4")
+    while True:
+        print("1. Crear proyecto")
+        print("2. Listar proyectos")
+        print("3. Modificar proyecto")
+        print("4. Eliminar proyecto")
+        print("5. Volver")
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            nombre = input("Ingrese el nombre del proyecto: ")
+            descripcion = input("Ingrese la descripcion del proyecto: ")
+            fechaInicio = input("Ingrese la fecha de inicio del proyecto (YYYY-MM-DD): ")
+            fechaVenci = input("Ingrese la fecha de fin del proyecto (YYYY-MM-DD): ")
+            estadoActual = input("Ingrese el estado Actual del proyecto: ")
+            empresa = input("Ingrese la empresa del proyecto: ")
+            gerente = input("Ingrese el nombre del gerente encargado proyecto: ")
+            equipo = input("Ingrese los equipos encargados del proyecto: ")
+            result = gestorP.crear_proyecto(nombre,descripcion,datetime.strptime(fechaInicio,"%Y %m %d"), datetime.strptime(fechaVenci,"%Y %m %d")
+                                   ,estadoActual,empresa,gerente,equipo)
+            print(result)
 
-# Creamos un árbol AVL vacío
-avl = AVL()
+menu = gestionar_proyectos()
+            
 
-# Insertamos los proyectos en el árbol AVL
-avl.insertar_fecha("31/12/2022")
-avl.insertar_fecha("28/02/2022")
-avl.insertar_fecha("31/03/2022")
-avl.insertar_fecha("30/04/2022")
-
-# Imprimimos los proyectos en orden ascendente por ID
-print("Proyectos en orden ascendente por ID:")
-avl.in_order(avl.raiz)
 
 
 
