@@ -45,4 +45,5 @@ def menu_reportes(gestor_empresa):
     reportes.mostrar_reportes()
 
 #menu = menu_empresa()
-reportes = menu_reportes()
+em = GestorEmpresa()
+reportes = menu_reportes(em)
