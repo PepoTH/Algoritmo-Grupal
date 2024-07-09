@@ -33,10 +33,14 @@ class GestorEmpresa:
     #Funcion que crea una empresa de un cliente
     def crear_empresa(self, nombre, descripcion, fechaC, direccion, telefono, correo, gerente, equipo_contacto,proyecto):
         if len(self.empresas) >= 0:
+            pru = []
             id = len(self.empresas) + 1
-            lista = pro.GestorProyecto().crear_proyecto(proyecto)
+            lista = pro.GestorProyecto().crear_proyecto()
+            pru.append(lista)
+            result_str = [str(proc) for proc in pru]
+            listanueva = ','.join(result_str)
             empresa = Empresa(id,nombre,descripcion,fechaC,direccion,telefono,
-                                      correo,gerente,equipo_contacto,lista)
+                                      correo,gerente,equipo_contacto,listanueva)
             self.empresas.append(empresa)
             self.guardar_datos()
             return
@@ -108,6 +112,8 @@ def menu_empresa():
         print("2.Consultar empresa")
         print("3.Listar empresa")
         print("4.Eliminar Empresa")
+        print("5.Modificar proyecto")
+        print("6.Gestionar proyectos")
         opc = int(input("Ingrese una opción: "))
 
         if(opc == 1):
@@ -117,7 +123,33 @@ def menu_empresa():
             dire = input("Ingrese la direccion de la empresa: ")
             tlf = input("Ingrese el numero de telefono de la empresa: ")
             correo = input("Ingrese el correo de la empresa: ")
-            gerente = input("Ingrese el nombre del gerente de la empresa")
-            equipo = input("Ingrese el equpio encargado de la empresa")
+            gerente = input("Ingrese el nombre del gerente de la empresa: ")
+            equipo = input("Ingrese el equpio encargado de la empresa: ")
             lista = []
             em.crear_empresa(nombre,descripcion,datetime.strptime(fecha,'%Y-%m-%d'),dire,tlf,correo,gerente,equipo,lista)
+        elif(opc == 2):
+            id = int(input("Introduzca el id del proyecto que quiere consultar: "))
+            em.consultar_empresa(id)
+        elif(opc == 3):
+            em.consultar_empresa()
+        elif(opc == 4):
+            id = int(input("Introduzca el id de la empresa quiere eliminar: "))
+            em.eliminar_empresa()
+        elif(opc == 5):
+            nombre = input("Ingrese el nombre de la empresa: ")
+            descripcion = input("Ingrese uan descripcion a la empresa: ")
+            fecha = input("Ingrese la fecha de creación de la empresa en el formato (YYYY-MM-DD): ")
+            dire = input("Ingrese la direccion de la empresa: ")
+            tlf = input("Ingrese el numero de telefono de la empresa: ")
+            correo = input("Ingrese el correo de la empresa: ")
+            gerente = input("Ingrese el nombre del gerente de la empresa")
+            equipo = input("Ingrese el equpio encargado de la empresa")
+            id = input("Ingrese el id de la empresa que quiere modificar: ")
+            em.modificar_empresa(id,nombre,descripcion,datetime.strptime(fecha,'%Y-%m-%d'),dire,tlf,correo,gerente,equipo)
+        elif opc == 6:
+            pro.main()
+
+menu = menu_empresa()
+        
+            
+        
