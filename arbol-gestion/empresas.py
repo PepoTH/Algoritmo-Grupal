@@ -121,5 +121,3 @@ def menu_empresa():
             equipo = input("Ingrese el equpio encargado de la empresa")
             lista = []
             em.crear_empresa(nombre,descripcion,datetime.strptime(fecha,'%Y-%m-%d'),dire,tlf,correo,gerente,equipo,lista)
-
-menu = menu_empresa()
