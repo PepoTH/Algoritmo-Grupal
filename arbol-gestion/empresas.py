@@ -4,7 +4,7 @@ import proyectos as pro
 
 class Empresa:
     def __init__(self,id,nombre,descripcion,fechaC,
-                 direccion,telefono,correo,gerente,equipo_Contacto,proyecto = []):
+        direccion,telefono,correo,gerente,equipo_Contacto,proyecto = []):
         self.id = id
         self.nombre = nombre
         self.descripcion = descripcion

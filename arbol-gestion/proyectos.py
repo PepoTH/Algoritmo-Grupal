@@ -196,7 +196,7 @@ def main():
                 fecha_vencimiento = datetime.strptime(proyecto["fecha_vencimiento"], "%Y-%m-%d")
                 avl.insertar_fecha(fecha_vencimiento)
             avl.in_order(avl.raiz)
-
+menu = main()
             
 
 
