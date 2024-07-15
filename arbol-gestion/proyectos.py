@@ -1,7 +1,6 @@
 from datetime import datetime
 class Proyecto:
-    def __init__(self,id,nombre,descripcion,fechaI,fechaV,
-                 estadoActual,empresa,gerente,equipo):
+    def __init__(self,id,nombre,descripcion,fechaI,fechaV,estadoActual,empresa,gerente,equipo):
         
         self.id = id
         self.nombre = nombre
@@ -14,7 +13,7 @@ class Proyecto:
         self.equipo = equipo
 
     def __str__(self) -> str:
-         return f"Proyecto: {self.nombre}, Descripcion: {self.descripcion}, Fecha inicio: {self.fechaI}, fecha vencimiento: {self.fechaV},estado: {self.estado}, empresa: {self.empresa}, gerente: {self.gerente}, equipo: {self.equipo}"
+        return f"Proyecto: {self.nombre}, Descripcion: {self.descripcion}, Fecha inicio: {self.fechaI}, fecha vencimiento: {self.fechaV},estado: {self.estado}, empresa: {self.empresa}, gerente: {self.gerente}, equipo: {self.equipo}"
 class GestorProyecto:
     def __init__(self):
         self.proyectos = []

@@ -26,8 +26,7 @@ class GestorEmpresa:
             reader = csv.reader(file)
             for arc in reader:
                 id,nombre,descripcion,fechaC,direccion,telefono,correo,gerente,equipo_contacto,proyecto = arc
-                empresa = Empresa(id,nombre,descripcion,fechaC,direccion,telefono,
-                                  correo,gerente,equipo_contacto,proyecto)
+                empresa = Empresa(id,nombre,descripcion,fechaC,direccion,telefono,correo,gerente,equipo_contacto,proyecto)
                 self.empresas.append(empresa)
     
     #Funcion que crea una empresa de un cliente
@@ -39,8 +38,7 @@ class GestorEmpresa:
             pru.append(lista)
             result_str = [str(proc) for proc in pru]
             listanueva = ','.join(result_str)
-            empresa = Empresa(id,nombre,descripcion,fechaC,direccion,telefono,
-                                      correo,gerente,equipo_contacto,listanueva)
+            empresa = Empresa(id,nombre,descripcion,fechaC,direccion,telefono,correo,gerente,equipo_contacto,listanueva)
             self.empresas.append(empresa)
             self.guardar_datos()
             return
@@ -68,8 +66,7 @@ class GestorEmpresa:
         print("No se han encontrado la empresa")
     
     #Funcion que modifica una empresa cliente segun su id
-    def modificar_empresa(self,id,nombre,descripcion,fechaC,
-                 direccion,telefono,correo,gerente,equipo_Contacto):
+    def modificar_empresa(self,id,nombre,descripcion,fechaC,direccion,telefono,correo,gerente,equipo_Contacto):
         for empresa in self.empresas:
             if empresa.id == id:
                 if nombre:
@@ -98,9 +95,7 @@ class GestorEmpresa:
             writer = csv.writer(file)
             writer.writerow(["Id", "Nombre", "Descripción", "Fecha de creación", "Dirección", "Telefono", "correo", "gerente", "equipo_contacto", "Proyectos"])
             for empresa in self.empresas:
-                writer.writerow([empresa.id, empresa.nombre, empresa.descripcion, empresa.fechaCreacion, 
-                                 empresa.direccion, empresa.telefono, empresa.correo, empresa.gerente, empresa.equipoC, 
-                                 empresa.proyectos])
+                writer.writerow([empresa.id, empresa.nombre, empresa.descripcion, empresa.fechaCreacion,empresa.direccion, empresa.telefono, empresa.correo, empresa.gerente, empresa.equipoC, empresa.proyectos])
 
 
 def menu_empresa():
